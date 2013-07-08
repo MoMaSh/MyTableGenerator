@@ -1,5 +1,6 @@
 package com.mmsh.vaadin.common;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -7,8 +8,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
 import java.util.Date;
 
-
-import org.apache.log4j.Logger;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
 import com.vaadin.shared.ui.colorpicker.Color;
 
@@ -69,7 +70,6 @@ public final class MyUtil {
 		} catch (UnsupportedEncodingException e2) {
 			e2.printStackTrace();
 		}
-		Logger.getLogger(MyUtil.class).error("Something went wrong. Logically the code shall not reach here.");
 		return "";
 	}
 	
@@ -94,7 +94,6 @@ public final class MyUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		Logger.getLogger(MyUtil.class).error("Something went wrong. Logically the code shall not reach here.");
 		return null;
 	}
 
@@ -114,8 +113,83 @@ public final class MyUtil {
 		return Integer.parseInt(value);
 	}
 
+	
+	
+	
+	
+	
+	
+	public static String base64encode(String text, String key) {
+		try {
+			
+			if (text == null || key == null) {
+				return null;
+			}
+
+			char[] keys = key.toCharArray();
+			char[] mesg = text.toCharArray();
+
+			int ml = mesg.length;
+			int kl = keys.length;
+			char[] newmsg = new char[ml];
+
+			for (int i = 0; i < ml; i++) {
+				newmsg[i] = (char) (mesg[i] ^ keys[i % kl]);
+			}
+			mesg = null;
+			keys = null;
+			
+			String rez = new BASE64Encoder().encode(new String(newmsg).getBytes("UTF-8"));
+			return rez;
+		} catch (UnsupportedEncodingException e) {
+			return null;
+		}
+	}
+
+	public static String base64decode(String text, String key) {
+
+		try {
+			String str = new String(new BASE64Decoder().decodeBuffer(text), "UTF-8");
+			
+			if (str == null || key == null) {
+				return null;
+			}
+
+			char[] keys = key.toCharArray();
+			char[] mesg = str.toCharArray();
+
+			int ml = mesg.length;
+			int kl = keys.length;
+			char[] newmsg = new char[ml];
+
+			for (int i = 0; i < ml; i++) {
+				newmsg[i] = (char) (mesg[i] ^ keys[i % kl]);
+			}
+			mesg = null;
+			keys = null;
+
+			return new String(newmsg);
+
+			
+			
+		} catch (IOException e) {
+			return null;
+		}
+
+	}
+
+	
+	
+	
+	
+	
+	
+	
 	public static void main(String[] args) {
 		hex2Rgb("#a22ed445");
 	}
+	
+	
+	
 	
 }

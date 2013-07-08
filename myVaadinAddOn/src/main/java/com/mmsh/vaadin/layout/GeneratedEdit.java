@@ -68,9 +68,18 @@ public class GeneratedEdit extends MyEdit {
 					components.add(txtField);
 					fieldTypes.add(f.getType());
 					
-					
+					formLayout.addComponent(txtField);
+				} else if (et.componentType() == TextField.class) {
+					TextField txtField = new TextField(et.caption());
+					txtField.setRequired(et.required());
+					if (entityItem != null) {
+						txtField.setPropertyDataSource(entityItem.getItemProperty(et.id()));
+					}
+					components.add(txtField);
+					fieldTypes.add(f.getType());
 					formLayout.addComponent(txtField);
 				} else if (et.componentType() == ColorPicker.class) {
+					
 					final ColorPicker colorPicker = new ColorPicker(et.caption());
 					final TextField tf = new TextField();
 					tf.setVisible(true);
