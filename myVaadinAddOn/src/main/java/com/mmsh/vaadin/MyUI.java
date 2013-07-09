@@ -2,7 +2,6 @@ package com.mmsh.vaadin;
 
 import com.mmsh.vaadin.windows.EditPopupWindow;
 import com.mmsh.vaadin.windows.ListPopupWindow;
-import com.vaadin.annotations.Theme;
 import com.vaadin.ui.UI;
 
 /**
@@ -18,7 +17,6 @@ import com.vaadin.ui.UI;
  *          $LastChangedDate: 2013-06-13 11:42:36 +0200 (Do, 13 Jun 2013) $
  * @author <a href="mailto:m.shahabi@osb-ag.de">$Author: mohammad.shahabi $</a><br>
  */
-@Theme("osb")
 public abstract class MyUI extends UI {
 	
 	/** The Constant serialVersionUID. */

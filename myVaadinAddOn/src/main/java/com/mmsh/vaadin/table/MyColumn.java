@@ -65,6 +65,10 @@ public class MyColumn implements Serializable {
 	 */
 	public  MyColumn(final String pId, final boolean pIsSearchable, final boolean pIsExactMatch) {
 		this(pId, "", pIsSearchable, pIsExactMatch, -1);
+		setCorrectName(pId);
+	}
+
+	private void setCorrectName(final String pId) {
 		String[] strCollection = pId.split("\\.");
 		String correctName = "";
 		for (int i = 0; i < strCollection.length; i++) {
@@ -76,6 +80,20 @@ public class MyColumn implements Serializable {
 		this.name = correctName;
 	}
 	
+	/**
+	 * Instantiates a new MyColumn object.
+	 * 
+	 * @param pId The id.
+	 * @param pName The name.
+	 * @param pIsSearchable The is searchable.
+	 * @param pIsExactMatch The is exact match.
+	 * @param pWidth The width.
+	 */
+	public  MyColumn(final String pId, final boolean pIsSearchable, final boolean pIsExactMatch, final boolean pIsIgnoreCase, final int pWidth) {
+		this(pId, "", pIsSearchable, pIsExactMatch, true, pWidth);
+		setCorrectName(pId);
+	}
+
 	/**
 	 * Instantiates a new MyColumn object.
 	 * 

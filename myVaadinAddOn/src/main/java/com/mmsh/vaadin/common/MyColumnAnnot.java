@@ -8,6 +8,10 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface MyColumnAnnot {
-	public String id();
-	public String name();
+	public String id() default "";
+	public String name() default "";
+	public boolean isSearchable() default true;
+	public boolean isExactMatch() default true;
+	public boolean isIgnoreCase() default true;
+	public int width() default -1;
 }

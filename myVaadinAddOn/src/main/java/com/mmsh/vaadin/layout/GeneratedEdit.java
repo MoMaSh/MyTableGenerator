@@ -6,6 +6,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
+
 import com.mmsh.vaadin.MyUI;
 import com.mmsh.vaadin.common.MyEditTypeAnnot;
 import com.mmsh.vaadin.common.MyUtil;
@@ -15,6 +17,7 @@ import com.mmsh.vaadin.table.TableInfo;
 import com.vaadin.addon.jpacontainer.EntityItem;
 import com.vaadin.ui.ColorPicker;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.DateField;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Layout;
 import com.vaadin.ui.Notification;
@@ -35,13 +38,13 @@ import com.vaadin.ui.components.colorpicker.ColorChangeListener;
  *          $LastChangedDate: 2013-06-21 14:10:25 +0200 (Fr, 21 Jun 2013) $
  * @author <a href="mailto:m.shahabi@osb-ag.de">$Author: mohammad.shahabi $</a><br>
  */
+@SuppressWarnings("rawtypes")
 public class GeneratedEdit extends MyEdit {
 	
 	private static final long serialVersionUID = 1736627586496278968L;
 	
 	private List<Component> components = new ArrayList<Component>();
 	
-	@SuppressWarnings("rawtypes")
 	private List<Class> fieldTypes = new ArrayList<Class>(); 
 	
 	public GeneratedEdit(final TableInfo tableInfo, final Object itemId) {
@@ -57,23 +60,30 @@ public class GeneratedEdit extends MyEdit {
 		
 		for (Field f : tableInfo.getClazz().getDeclaredFields()) {
 			MyEditTypeAnnot et = f.getAnnotation(MyEditTypeAnnot.class);
+			Column c = f.getAnnotation(Column.class);
 			if (et != null) {
 				if (et.componentType() == MyTextField.class) {
-					MyTextField txtField = new MyTextField(et.caption(), et.required(), et.max());
-					txtField.setRequired(true);
+					MyTextField txtField = new MyTextField(et.caption(), c.nullable(), c.length());
 					if (entityItem != null) {
-						txtField.setPropertyDataSource(entityItem.getItemProperty(et.id()));
+						txtField.setPropertyDataSource(entityItem.getItemProperty(c.name()));
 					}
-					
 					components.add(txtField);
 					fieldTypes.add(f.getType());
-					
 					formLayout.addComponent(txtField);
 				} else if (et.componentType() == TextField.class) {
 					TextField txtField = new TextField(et.caption());
-					txtField.setRequired(et.required());
+					txtField.setRequired(c.nullable());
 					if (entityItem != null) {
-						txtField.setPropertyDataSource(entityItem.getItemProperty(et.id()));
+						txtField.setPropertyDataSource(entityItem.getItemProperty(c.name()));
+					}
+					components.add(txtField);
+					fieldTypes.add(f.getType());
+					formLayout.addComponent(txtField);
+				} else if (et.componentType() == DateField.class) {
+					DateField txtField = new DateField(et.caption());
+					txtField.setRequired(c.nullable());
+					if (entityItem != null) {
+						txtField.setPropertyDataSource(entityItem.getItemProperty(c.name()));
 					}
 					components.add(txtField);
 					fieldTypes.add(f.getType());
@@ -84,7 +94,7 @@ public class GeneratedEdit extends MyEdit {
 					final TextField tf = new TextField();
 					tf.setVisible(true);
 					if (entityItem != null) {
-						tf.setPropertyDataSource(entityItem.getItemProperty(et.id()));
+						tf.setPropertyDataSource(entityItem.getItemProperty(c.name()));
 					}
 					colorPicker.setColor(MyUtil.hex2Rgb(tf.getValue()));
 					colorPicker.addColorChangeListener(new ColorChangeListener() {
@@ -111,7 +121,7 @@ public class GeneratedEdit extends MyEdit {
 	}
 
 	
-	@SuppressWarnings({"rawtypes", "unchecked"})
+	@SuppressWarnings("unchecked")
 	@Override
 	public final void saveAction(final TableInfo tableInfo) {
 		if (checkValidation()) {

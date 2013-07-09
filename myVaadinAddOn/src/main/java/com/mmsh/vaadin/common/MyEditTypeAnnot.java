@@ -5,12 +5,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import com.mmsh.vaadin.components.MyTextField;
+
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface MyEditTypeAnnot {
-	public String id();
-	public Class<?> componentType();
 	public String caption();
-	public boolean required();
-	public int max();
+	public Class<?> componentType() default MyTextField.class;
 }

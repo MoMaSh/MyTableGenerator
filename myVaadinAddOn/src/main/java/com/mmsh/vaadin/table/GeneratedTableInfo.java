@@ -7,8 +7,6 @@ import java.util.List;
 
 import com.mmsh.vaadin.MyUI;
 import com.mmsh.vaadin.common.MyColumnAnnot;
-import com.mmsh.vaadin.common.MyColumnExtendedAnnot;
-import com.mmsh.vaadin.common.MyDefalutColumnAnnot;
 import com.mmsh.vaadin.common.MyTableAnnot;
 import com.mmsh.vaadin.layout.GeneratedEdit;
 import com.mmsh.vaadin.windows.EditPopupWindow;
@@ -48,23 +46,29 @@ public class GeneratedTableInfo extends TableInfo {
 			List<MyColumn> l = new ArrayList<MyColumn>();	
 			List<String> nested = new ArrayList<String>();
 			for (Field f : clazz.getDeclaredFields()) {
-				for (Annotation a : f.getAnnotations()) {
-					if (a instanceof MyDefalutColumnAnnot) {
-						l.add(new MyColumn(f.getName()));
-					} else if (a instanceof MyColumnAnnot) {
-						MyColumnAnnot mc = (MyColumnAnnot) a;
-						l.add(new MyColumn(mc.id(), mc.name()));
-						if (mc.id().contains(".")) {
-							nested.add(mc.id());
+				for (Annotation annotation : f.getAnnotations()) {
+					if (annotation instanceof MyColumnAnnot) {
+						MyColumnAnnot mc = (MyColumnAnnot) annotation;
+
+						MyColumn osbColumn;
+						String id = mc.id();
+						if ("".equals(id)) {
+							id = f.getName();
 						}
-					} else if (a instanceof MyColumnExtendedAnnot) {
-						MyColumnExtendedAnnot mc = (MyColumnExtendedAnnot) a;
-						MyColumn osbColumn = new MyColumn(mc.id(), mc.name(), mc.isSearchable(), mc.isExactMatch(), mc.isIgnoreCase(), mc.width());
+						String name = mc.name();
+						if ("".equals(name)) {
+							osbColumn = new MyColumn(id, mc.isSearchable(), mc.isExactMatch(), mc.isIgnoreCase(), mc.width());
+						} else {
+							osbColumn = new MyColumn(id, mc.name(), mc.isSearchable(), mc.isExactMatch(), mc.isIgnoreCase(), mc.width());
+						}
+						
+
 						l.add(osbColumn);
 						if (mc.id().contains(".")) {
 							nested.add(mc.id());
 						}
 					}
+					
 				}
 			}
 			this.setColumns(l);

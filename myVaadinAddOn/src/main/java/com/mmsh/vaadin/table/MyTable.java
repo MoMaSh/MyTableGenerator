@@ -145,7 +145,7 @@ public abstract class MyTable extends CustomComponent {
 		actionButtonsHL.setSpacing(true);
 
 		if (tableInfo.isEditable() && !tableInfo.isNested()) {
-			btnNew = new MyButton(new ThemeResource("osbImages/buttons/new64.png"));
+			btnNew = new MyButton(new ThemeResource("myVaadin/buttons/new.png"));
 			btnNew.addClickListener(newButtonListener());
 			actionButtonsHL.addComponent(btnNew);
 		}
@@ -154,11 +154,7 @@ public abstract class MyTable extends CustomComponent {
 		 * Delete Multiple Button
 		 */
 		if (tableInfo.isDeletable()) {
-			if (!tableInfo.isPopup()) {
-				btnDeleteMultiple = new MyButton(new ThemeResource("osbImages/buttons/deleteMultiple64.png"));
-			} else {
-				btnDeleteMultiple = new MyButton(new ThemeResource("osbImages/buttons/deleteMultiple32.png"));
-			}
+			btnDeleteMultiple = new MyButton(new ThemeResource("myVaadin/buttons/deleteMultiple.png"));
 			btnDeleteMultiple.addClickListener(deleteMultipleButtonListener());
 			btnDeleteMultiple.setVisible(false);
 			actionButtonsHL.addComponent(btnDeleteMultiple);
@@ -168,7 +164,7 @@ public abstract class MyTable extends CustomComponent {
 		 * Save and Cancel Buttons
 		 */
 		if ((tableInfo.isInlineEdit() && !tableInfo.isNested()) || tableInfo.isForSelection()) {
-			btnSave = new MyButton(new ThemeResource("osbImages/buttons/save64.png"));
+			btnSave = new MyButton(new ThemeResource("myVaadin/buttons/save.png"));
 			btnSave.addClickListener(saveButtonListener());
 			actionButtonsHL.addComponent(btnSave);
 
@@ -185,11 +181,7 @@ public abstract class MyTable extends CustomComponent {
 		 * Add Button
 		 */
 		if (tableInfo.isInlineEdit() && tableInfo.isNested()) {
-			if (!tableInfo.isPopup()) {
-				btnAdd = new MyButton(new ThemeResource("osbImages/buttons/inlineAdd64.png"));
-			} else {
-				btnAdd = new MyButton(new ThemeResource("osbImages/buttons/inlineAdd32.png"));
-			}
+			btnAdd = new MyButton(new ThemeResource("myVaadin/buttons/inlineAdd.png"));
 			actionButtonsHL.addComponent(btnAdd);
 		}
 
@@ -197,11 +189,7 @@ public abstract class MyTable extends CustomComponent {
 		 * Export Button
 		 */
 		if (tableInfo.isExportEnabled()) {
-			if (!tableInfo.isPopup()) {
-				btnPrintExport = new MyButton(new ThemeResource("osbImages/buttons/excel64.png"));
-			} else {
-				btnPrintExport = new MyButton(new ThemeResource("osbImages/buttons/excel32.png"));
-			}
+			btnPrintExport = new MyButton(new ThemeResource("myVaadin/buttons/excel.png"));
 			if (tableInfo.isSelectionExport()) {
 				btnPrintExport.setVisible(false);
 			} else {
@@ -224,7 +212,7 @@ public abstract class MyTable extends CustomComponent {
 					return fis;
 				}
 			};
-			Resource resource = new StreamResource(stream, "Vorlage Beschriftung Kabel.xlsx");
+			Resource resource = new StreamResource(stream, "ExcelExport.xlsx");
 			FileDownloader fd = new FileDownloader(resource);
 			fd.extend(btnPrintExport);
 			actionButtonsHL.addComponent(btnPrintExport);
@@ -346,12 +334,12 @@ public abstract class MyTable extends CustomComponent {
 				editCell.addStyleName("tableCellIcon");
 				editCell.setData(itemId);
 				editCell.addClickListener(new Button.ClickListener() {
-					private static final long serialVersionUID = 7853224328437899372L;
+					private static final long serialVersionUID = -7781579576610805407L;
 					public void buttonClick(final ClickEvent event) {
 						tableInfo.defineEdit(itemId);
 					} 
 				});
-				editCell.setIcon(new ThemeResource("osbImages/icons/edit32.png"));
+				editCell.setIcon(new ThemeResource("myVaadin/icons/edit.png"));
 				editCell.addStyleName("link");
 				return editCell;
 			}
@@ -377,7 +365,7 @@ public abstract class MyTable extends CustomComponent {
 						DeleteConfirmation.show(table, itemId);
 					}
 				});
-				deleteCell.setIcon(new ThemeResource("osbImages/icons/delete32.png"));
+				deleteCell.setIcon(new ThemeResource("myVaadin/icons/delete.png"));
 				deleteCell.addStyleName("link");
 				return deleteCell;
 			}
@@ -410,7 +398,7 @@ public abstract class MyTable extends CustomComponent {
 			searchTextsLayout.setSpacing(true);
 			searchComponentHL.addComponent(searchTextsLayout);
 			
-			btnSearch = new MyButton(new ThemeResource("osbImages/icons/search32.png"));
+			btnSearch = new MyButton(new ThemeResource("myVaadin/icons/search.png"));
 			btnSearch.setImmediate(true);
 			searchComponentHL.addComponent(btnSearch);
 			mainLayout.addComponent(searchComponentHL);

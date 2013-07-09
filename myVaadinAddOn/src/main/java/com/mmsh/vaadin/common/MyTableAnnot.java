@@ -9,8 +9,8 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface MyTableAnnot {
 	public String caption();
-	public String persistanceName();
-	public int height();
-	public int width();
 	public String popupCaption();
+	public int height() default 100;
+	public int width() default 300;
+	public String persistanceName();
 }
