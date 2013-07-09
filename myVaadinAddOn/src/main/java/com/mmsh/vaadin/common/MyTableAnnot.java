@@ -8,9 +8,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface MyTableAnnot {
-	public String caption();
-	public String popupCaption();
+	public String caption() default "";
+	public String popupCaption() default "";
 	public int height() default 100;
 	public int width() default 300;
-	public String persistanceName();
+	public String persistanceName() default "";
 }

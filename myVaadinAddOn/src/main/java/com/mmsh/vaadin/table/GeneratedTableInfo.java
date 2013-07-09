@@ -5,11 +5,14 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Table;
+
 import com.mmsh.vaadin.MyUI;
 import com.mmsh.vaadin.common.MyColumnAnnot;
 import com.mmsh.vaadin.common.MyTableAnnot;
 import com.mmsh.vaadin.layout.GeneratedEdit;
 import com.mmsh.vaadin.windows.EditPopupWindow;
+import com.vaadin.addon.jpacontainer.JPAContainer;
 import com.vaadin.addon.jpacontainer.JPAContainerFactory;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.UI;
@@ -35,8 +38,16 @@ public class GeneratedTableInfo extends TableInfo {
 		this.setClazz(clazz);
 		
 		MyTableAnnot classAnnotation = clazz.getAnnotation(MyTableAnnot.class);
+		Table table = clazz.getAnnotation(Table.class);
+		
 		this.setCaption(classAnnotation.caption());
-		this.setJpaContainer(JPAContainerFactory.make(clazz, classAnnotation.persistanceName()));
+		
+		String persistenceName = classAnnotation.persistanceName();
+		if ("".equals(persistenceName)) {
+			persistenceName = table.catalog();
+		}
+		JPAContainer<?> jpa = JPAContainerFactory.make(clazz, persistenceName);
+		this.setJpaContainer(jpa);
 		
 		this.setPopupCaption(classAnnotation.popupCaption());
 		this.setPopupWidth(classAnnotation.width());
@@ -61,8 +72,6 @@ public class GeneratedTableInfo extends TableInfo {
 						} else {
 							osbColumn = new MyColumn(id, mc.name(), mc.isSearchable(), mc.isExactMatch(), mc.isIgnoreCase(), mc.width());
 						}
-						
-
 						l.add(osbColumn);
 						if (mc.id().contains(".")) {
 							nested.add(mc.id());
