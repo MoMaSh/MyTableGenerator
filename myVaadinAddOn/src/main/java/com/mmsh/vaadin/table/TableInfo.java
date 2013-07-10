@@ -4,9 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mmsh.vaadin.components.MyEdit;
+import com.mmsh.vaadin.components.MyImport;
 import com.vaadin.addon.jpacontainer.JPAContainer;
 import com.vaadin.data.Container.Filter;
-import com.vaadin.ui.Component;
 
 /**
  * Description: The specific information about each {@link MyTable} that is supposed to be created.<br>
@@ -79,6 +80,9 @@ public abstract class TableInfo implements Serializable {
 	/** The is inline edit. */
 	private boolean isInlineEdit = false;
 	
+	/** The is inline edit. */
+	private boolean isImportable = false;
+	
 	/** The is export enabled. */
 	private boolean isExportEnabled = true;
 	
@@ -94,15 +98,6 @@ public abstract class TableInfo implements Serializable {
 	private boolean autoGenerate = false;
 
 	private boolean forSelection = false;
-	/**
-	 * Define edit.
-	 * 
-	 * @param itemId
-	 *            The item id
-	 */
-	public final void defineEdit(final Object itemId) {
-		defineEdit(itemId, false);
-	}
 
 	/**
 	 * Define edit.
@@ -111,15 +106,13 @@ public abstract class TableInfo implements Serializable {
 	 *            The item id
 	 * @param duplicate
 	 *            The duplicate
+	 * @return 
 	 */
-	public abstract void defineEdit(Object itemId, boolean duplicate);
+	public abstract MyEdit getEditComponent(Object itemId);
 	
-	/**
-	 * Gets the new entity.
-	 * 
-	 * @return The new entity
-	 */
-	public abstract Component getNewEntity();
+	public abstract MyImport getImportComponent();
+	
+	public abstract MyEdit getNewComponent();
 
 	/**
 	 * Gets the id.
@@ -573,5 +566,12 @@ public abstract class TableInfo implements Serializable {
 	public void setForSelection(boolean forSelection) {
 		this.forSelection = forSelection;
 	}
-	
+
+	public boolean isImportable() {
+		return isImportable;
+	}
+
+	public void setImportable(boolean isImportable) {
+		this.isImportable = isImportable;
+	}
 }

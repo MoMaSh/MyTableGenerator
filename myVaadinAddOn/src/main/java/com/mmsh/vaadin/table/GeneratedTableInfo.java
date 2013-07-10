@@ -7,15 +7,13 @@ import java.util.List;
 
 import javax.persistence.Table;
 
-import com.mmsh.vaadin.MyUI;
 import com.mmsh.vaadin.common.MyColumnAnnot;
 import com.mmsh.vaadin.common.MyTableAnnot;
+import com.mmsh.vaadin.components.MyEdit;
+import com.mmsh.vaadin.components.MyImport;
 import com.mmsh.vaadin.layout.GeneratedEdit;
-import com.mmsh.vaadin.windows.EditPopupWindow;
 import com.vaadin.addon.jpacontainer.JPAContainer;
 import com.vaadin.addon.jpacontainer.JPAContainerFactory;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.UI;
 
 
 /**
@@ -86,12 +84,18 @@ public class GeneratedTableInfo extends TableInfo {
 	}
 	
 	@Override
-	public void defineEdit(Object itemId, boolean duplicate) {
-		((MyUI) UI.getCurrent()).showEditPopup(new EditPopupWindow(this, new GeneratedEdit(this, itemId)));
+	public MyEdit getEditComponent(Object itemId) {
+		return new GeneratedEdit(this, itemId);
 	}
 
 	@Override
-	public Component getNewEntity() {
+	public MyEdit getNewComponent() {
 		return new GeneratedEdit(this, null);
 	}
+
+	@Override
+	public MyImport getImportComponent() {
+		return null;
+	}
+
 }

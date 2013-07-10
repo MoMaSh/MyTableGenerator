@@ -27,7 +27,7 @@ import com.vaadin.ui.components.colorpicker.ColorChangeEvent;
 import com.vaadin.ui.components.colorpicker.ColorChangeListener;
 
 /**
- * Description: The edit page for {@link Typ} which is of type {@link MyEdit}.<br>
+ * Description: The edit page for {@link Typ} which is of type {@link MyEdit2}.<br>
  * <br>
  * Company: <a href="http://www.osb-ag.de">OSB AG</a> <br>
  * Filename: EditTyp.java <br>
@@ -163,7 +163,7 @@ public class GeneratedEdit extends MyEdit {
 	FormLayout formLayout;
 	
 	@Override
-	public final Layout generateComponents() {
+	public final Layout generateContent() {
 		formLayout = new FormLayout();
 		formLayout.setImmediate(true);
 		formLayout.setMargin(true);

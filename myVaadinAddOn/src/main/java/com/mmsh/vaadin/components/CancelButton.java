@@ -29,7 +29,7 @@ public class CancelButton extends MyButton {
 	 * @param isEdit Indicates the type of active window.  
 	 */
 	public CancelButton(final boolean isEdit) {
-		super(new ThemeResource("osbImages/buttons/notSave64.png"));
+		super(new ThemeResource("myVaadin/buttons/notSave.png"));
 		this.addClickListener(new Button.ClickListener() {
 			private static final long serialVersionUID = -9132805767679652865L;
 			@Override

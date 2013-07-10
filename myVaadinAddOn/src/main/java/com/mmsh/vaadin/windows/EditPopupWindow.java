@@ -1,7 +1,6 @@
 package com.mmsh.vaadin.windows;
 
 import com.mmsh.vaadin.table.TableInfo;
-import com.vaadin.ui.Component;
 import com.vaadin.ui.Window;
 
 /**
@@ -27,29 +26,30 @@ public class EditPopupWindow extends Window {
 	/** The Constant MIN_WIDTH. */
 	private static final int MIN_WIDTH = 20;
 
-	/**
-	 * Instantiates a new EditPopupWindow object.
-	 * 
-	 * @param tableInfo
-	 *            The table info
-	 */
-	public EditPopupWindow(final TableInfo tableInfo) {
-		beforeSettingContent(tableInfo);
-		setContent(tableInfo.getNewEntity());
-		afterSettingContent(tableInfo);
+	public EditPopupWindow(final TableInfo tableInfo, Type type) {
+		this(tableInfo, null, type);
 	}
-
 	/**
 	 * Instantiates a new EditPopupWindow object.
 	 * 
 	 * @param tableInfo
 	 *            The table info
-	 * @param content
-	 *            The content
 	 */
-	public EditPopupWindow(final TableInfo tableInfo, final Component content) {
+	public EditPopupWindow(final TableInfo tableInfo, Object itemId, Type type) {
 		beforeSettingContent(tableInfo);
-		setContent(content);
+		switch (type) {
+		case NEW:
+			setContent(tableInfo.getNewComponent());
+			break;
+		case EDIT:
+			setContent(tableInfo.getEditComponent(itemId));
+			break;
+		case IMPORT:
+			setContent(tableInfo.getImportComponent());
+			break;
+		default:
+			break;
+		}
 		afterSettingContent(tableInfo);
 	}
 
@@ -77,5 +77,6 @@ public class EditPopupWindow extends Window {
 		getContent().setWidth(tableInfo.getPopupWidth(), Unit.PIXELS);
 		getContent().setHeight(tableInfo.getPopupHeight(), Unit.PIXELS);
 	}
-
+	
 }
+

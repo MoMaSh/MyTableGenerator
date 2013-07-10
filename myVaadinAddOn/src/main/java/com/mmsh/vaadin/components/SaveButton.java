@@ -27,7 +27,7 @@ public class SaveButton extends MyButton {
 	 * @param isEdit Indicates if the save button is in an edit form or a list.
 	 */
 	public SaveButton(final boolean isEdit) {
-		super(new ThemeResource("osbImages/buttons/save64.png"));
+		super(new ThemeResource("myVaadin/buttons/save.png"));
 //		this.addClickListener(new ClickListener() {
 //			private static final long serialVersionUID = -7410882591286678401L;
 //

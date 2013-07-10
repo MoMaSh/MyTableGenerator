@@ -12,6 +12,7 @@ import com.mmsh.vaadin.MyUI;
 import com.mmsh.vaadin.components.CancelButton;
 import com.mmsh.vaadin.components.MyButton;
 import com.mmsh.vaadin.windows.EditPopupWindow;
+import com.mmsh.vaadin.windows.Type;
 import com.vaadin.addon.jpacontainer.JPAContainer;
 import com.vaadin.data.Container.Filter;
 import com.vaadin.data.Property.ValueChangeEvent;
@@ -73,6 +74,9 @@ public abstract class MyTable extends CustomComponent {
 	
 	/** The btn add. */
 	private MyButton btnAdd;
+	
+	/** The btn import. */
+	private MyButton btnImport;
 	
 	/** The btn delete multiple. */
 	private MyButton btnDeleteMultiple;
@@ -143,6 +147,15 @@ public abstract class MyTable extends CustomComponent {
 		actionButtonsHL.setWidth("100.0%");
 		actionButtonsHL.setMargin(true);
 		actionButtonsHL.setSpacing(true);
+
+		/*
+		 * Import Button
+		 */
+		if (tableInfo.isImportable()) {
+			btnImport = new MyButton(new ThemeResource("myVaadin/buttons/import.png"));
+			btnImport.addClickListener(importButtonListener());
+			actionButtonsHL.addComponent(btnImport);
+		}
 
 		if (tableInfo.isEditable() && !tableInfo.isNested()) {
 			btnNew = new MyButton(new ThemeResource("myVaadin/buttons/new.png"));
@@ -248,9 +261,6 @@ public abstract class MyTable extends CustomComponent {
 
 		mainLayout.addComponent(actionButtonsHL);
 
-		
-		
-		
 		setCompositionRoot(mainLayout);
 		
 		table.setEditable(pTableInfo.isInlineEdit());
@@ -336,7 +346,7 @@ public abstract class MyTable extends CustomComponent {
 				editCell.addClickListener(new Button.ClickListener() {
 					private static final long serialVersionUID = -7781579576610805407L;
 					public void buttonClick(final ClickEvent event) {
-						tableInfo.defineEdit(itemId);
+						((MyUI) UI.getCurrent()).showEditPopup(new EditPopupWindow(tableInfo, itemId, Type.EDIT));
 					} 
 				});
 				editCell.setIcon(new ThemeResource("myVaadin/icons/edit.png"));
@@ -372,8 +382,6 @@ public abstract class MyTable extends CustomComponent {
 		};
 	}
 
-	
-	boolean hasSearchField = false;
 	
 	private boolean hasSearchField() {
 		for (MyColumn column : tableInfo.getColumns()) {
@@ -524,8 +532,23 @@ public abstract class MyTable extends CustomComponent {
 			private static final long serialVersionUID = -5000801077096604587L;
 			@Override
 			public void buttonClick(final ClickEvent event) {
-				EditPopupWindow editPopupWindow = new EditPopupWindow(tableInfo);
-				((MyUI) UI.getCurrent()).showEditPopup(editPopupWindow);
+				((MyUI) UI.getCurrent()).showEditPopup(new EditPopupWindow(tableInfo, Type.NEW));
+			}
+		};
+	}
+
+	/**
+	 * New button listener.
+	 * 
+	 * @return The {@link ClickListener} for "New" button.
+	 */
+	private ClickListener importButtonListener() {
+		return new Button.ClickListener() {
+			private static final long serialVersionUID = -484761074161106972L;
+
+			@Override
+			public void buttonClick(final ClickEvent event) {
+				((MyUI) UI.getCurrent()).showEditPopup(new EditPopupWindow(tableInfo, Type.IMPORT));
 			}
 		};
 	}
