@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.mmsh.vaadin</groupId>
 	<artifactId>MyVaadin</artifactId>
-	<version>0.5.2.2</version>
+	<version>0.5.2.1</version>
 	<name>MyVaadin Addon</name>
 
 	<properties>
@@ -220,7 +220,7 @@
 						<addMavenDescriptor>false</addMavenDescriptor>
 						<manifestEntries>
 							<Implementation-Title>MyVaadin</Implementation-Title>
-							<Implementation-Version>${this.version}</Implementation-Version>
+							<Implementation-Version>0.5.2.1</Implementation-Version>
 							<Vaadin-Package-Version>1</Vaadin-Package-Version>
 						</manifestEntries>
 					</archive>
