@@ -14,14 +14,13 @@ import com.vaadin.ui.UI;
  * Description: Generalization for Command buttons that are supposed to view <br>
  * the corresponding tables. Here there are some reflections used.<br>
  * 
- * Company: <a href="http://www.osb-ag.de">OSB AG</a> <br>
  * Filename: CommandButton.java <br>
  * 
  * @since 17.06.2013 <br>
  * @version <br>
  *          $LastChangedRevision$ <br>
  *          $LastChangedDate$
- * @author <a href="mailto:m.shahabi@osb-ag.de">$Author$</a><br>
+ * @author <a href="mailto:m.m.shahabi@gmail.com">$Author: mohammad.shahabi $</a><br>
  */
 public abstract class CommandButton extends MyButton {
 	

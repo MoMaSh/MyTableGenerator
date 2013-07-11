@@ -6,14 +6,13 @@ import com.vaadin.ui.TextField;
  * Description: The Search Text component which extends {@link TextField} with some <br>
  * extra information such as the propertyId of the table containerDataSource and search properties. <br>
  * <br>
- * Company: <a href="http://www.osb-ag.de">OSB AG</a> <br>
  * Filename: SearchText.java <br>
  * 
  * @since 18.06.2013 <br>
  * @version <br>
  *          $LastChangedRevision$ <br>
  *          $LastChangedDate$
- * @author <a href="mailto:m.shahabi@osb-ag.de">$Author$</a><br>
+ * @author <a href="mailto:m.m.shahabi@gmail.com">$Author: mohammad.shahabi $</a><br>
  */
 public class SearchText extends TextField {
 	

@@ -8,14 +8,13 @@ import com.vaadin.ui.TextField;
 /**
  * Description: This component is made out of {@link TextField}.<br>
  * <br>
- * Company: <a href="http://www.osb-ag.de">OSB AG</a> <br>
  * Filename: MyNumberField.java <br>
  * 
  * @since 20.06.2013 <br>
  * @version <br>
  *          $LastChangedRevision$ <br>
  *          $LastChangedDate$
- * @author <a href="mailto:m.shahabi@osb-ag.de">$Author$</a><br>
+ * @author <a href="mailto:m.m.shahabi@gmail.com">$Author: mohammad.shahabi $</a><br>
  */
 public class MyTextField extends TextField {
 

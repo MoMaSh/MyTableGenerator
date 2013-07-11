@@ -10,7 +10,7 @@ public class GenerateTable extends MyTable {
 
 
 	public GenerateTable(Class<?> clazz) {
-		this(clazz, true);
+		this(clazz, false);
 	}
 
 	public GenerateTable(Class<?> clazz, boolean includeId) {

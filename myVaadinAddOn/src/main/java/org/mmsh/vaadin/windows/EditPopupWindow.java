@@ -7,14 +7,13 @@ import com.vaadin.ui.Window;
 /**
  * Description: The Edit pop-up window.<br>
  * <br>
- * Company: <a href="http://www.osb-ag.de">OSB AG</a> <br>
  * Filename: EditPopupWindow.java <br>
  * 
  * @since 18.06.2013 <br>
  * @version <br>
  *          $LastChangedRevision: 150 $ <br>
  *          $LastChangedDate: 2013-06-19 19:34:16 +0200 (Mi, 19 Jun 2013) $
- * @author <a href="mailto:m.shahabi@osb-ag.de">$Author: mohammad.shahabi $</a><br>
+ * @author <a href="mailto:m.m.shahabi@gmail.com">$Author: mohammad.shahabi $</a><br>
  */
 public class EditPopupWindow extends Window {
 

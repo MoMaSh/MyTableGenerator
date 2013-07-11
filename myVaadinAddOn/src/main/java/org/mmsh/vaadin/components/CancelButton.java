@@ -10,14 +10,13 @@ import com.vaadin.ui.UI;
  * Description: This is a specific Button component from <a>{@link MyButton}</a> which creates a <br> 
  * button that closes the popped up window.<br>
  * <br>
- * Company: <a href="http://www.osb-ag.de">OSB AG</a> <br>
  * Filename: CancelButton.java <br>
  * 
  * @since 13.06.2013 <br>
  * @version <br>
  *          $LastChangedRevision: 156 $ <br>
  *          $LastChangedDate: 2013-06-21 11:01:01 +0200 (Fr, 21 Jun 2013) $
- * @author <a href="mailto:m.shahabi@osb-ag.de">$Author: mohammad.shahabi $</a><br>
+ * @author <a href="mailto:m.m.shahabi@gmail.com">$Author: mohammad.shahabi $</a><br>
  */
 public class CancelButton extends MyButton {
 	

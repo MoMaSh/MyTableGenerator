@@ -5,14 +5,13 @@ import java.io.Serializable;
 /**
  * Description: Generates a column for the {@link MyTable}.<br>
  * <br>
- * Company: <a href="http://www.osb-ag.de">OSB AG</a> <br>
  * Filename: MyColumn.java <br>
  * 
  * @since 18.06.2013 <br>
  * @version <br>
  *          $LastChangedRevision: 156 $ <br>
  *          $LastChangedDate: 2013-06-21 11:01:01 +0200 (Fr, 21 Jun 2013) $
- * @author <a href="mailto:m.shahabi@osb-ag.de">$Author: mohammad.shahabi $</a><br>
+ * @author <a href="mailto:m.m.shahabi@gmail.com">$Author: mohammad.shahabi $</a><br>
  */
 public class MyColumn implements Serializable {
 

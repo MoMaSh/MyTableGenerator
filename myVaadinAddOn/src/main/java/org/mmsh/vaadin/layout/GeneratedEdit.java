@@ -32,14 +32,13 @@ import com.vaadin.ui.components.colorpicker.ColorChangeListener;
 /**
  * Description: The edit page for {@link Typ} which is of type {@link MyEdit2}.<br>
  * <br>
- * Company: <a href="http://www.osb-ag.de">OSB AG</a> <br>
  * Filename: EditTyp.java <br>
  * 
  * @since 19.06.2013 <br>
  * @version <br>
  *          $LastChangedRevision: 159 $ <br>
  *          $LastChangedDate: 2013-06-21 14:10:25 +0200 (Fr, 21 Jun 2013) $
- * @author <a href="mailto:m.shahabi@osb-ag.de">$Author: mohammad.shahabi $</a><br>
+ * @author <a href="mailto:m.m.shahabi@gmail.com">$Author: mohammad.shahabi $</a><br>
  */
 @SuppressWarnings("rawtypes")
 public class GeneratedEdit extends MyEdit {

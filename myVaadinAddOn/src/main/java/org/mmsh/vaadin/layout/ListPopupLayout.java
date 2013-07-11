@@ -11,14 +11,13 @@ import com.vaadin.ui.VerticalLayout;
 /**
  * Description: Creates a list pop-up layout.<br>
  * <br>
- * Company: <a href="http://www.osb-ag.de">OSB AG</a> <br>
  * Filename: ListPopupLayout.java <br>
  * 
  * @since 17.06.2013 <br>
  * @version <br>
  *          $LastChangedRevision: 151 $ <br>
  *          $LastChangedDate: 2013-06-20 12:39:55 +0200 (Do, 20 Jun 2013) $
- * @author <a href="mailto:m.shahabi@osb-ag.de">$Author: mohammad.shahabi $</a><br>
+ * @author <a href="mailto:m.m.shahabi@gmail.com">$Author: mohammad.shahabi $</a><br>
  */
 public class ListPopupLayout extends CustomComponent {
 

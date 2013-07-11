@@ -9,14 +9,13 @@ import com.vaadin.ui.UI;
  * Description: The UI of each project made with the help of the OSB template must extend this UI file. 
  * <br> By default the template uses <i>"osb"</i> theme.<br>
  * <br>
- * Company: <a href="http://www.osb-ag.de">OSB AG</a> <br>
  * Filename: MyUI.java <br>
  * 
  * @since 13.06.2013 <br>
  * @version <br>
  *          $LastChangedRevision: 125 $ <br>
  *          $LastChangedDate: 2013-06-13 11:42:36 +0200 (Do, 13 Jun 2013) $
- * @author <a href="mailto:m.shahabi@osb-ag.de">$Author: mohammad.shahabi $</a><br>
+ * @author <a href="mailto:m.m.shahabi@gmail.com">$Author: mohammad.shahabi $</a><br>
  */
 public abstract class MyUI extends UI {
 	

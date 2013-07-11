@@ -11,14 +11,13 @@ import com.vaadin.ui.UI;
 /**
  * Description: The specialization for the the {@link MyButton} which logs out the user.<br>
  *<br>
- * Company: <a href="http://www.osb-ag.de">OSB AG</a> <br>
  * Filename: LogoutButton.java <br>
  * 
  * @since 17.06.2013 <br>
  * @version <br>
  *          $LastChangedRevision$ <br>
  *          $LastChangedDate$
- * @author <a href="mailto:m.shahabi@osb-ag.de">$Author$</a><br>
+ * @author <a href="mailto:m.m.shahabi@gmail.com">$Author: mohammad.shahabi $</a><br>
  */
 public abstract class LogoutButton extends MyButton {
 	

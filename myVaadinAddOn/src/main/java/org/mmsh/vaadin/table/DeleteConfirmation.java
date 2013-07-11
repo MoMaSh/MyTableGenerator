@@ -10,14 +10,13 @@ import com.vaadin.ui.Table;
 /**
  * Description: Before a deletion occurs a dialog will get the confirmation from<br>
  * the user. This class uses {@link ConfirmDialog}.<br>
- * Company: <a href="http://www.osb-ag.de">OSB AG</a> <br>
  * Filename: DeleteConfirmation.java <br>
  * 
  * @since 17.06.2013 <br>
  * @version <br>
  *          $LastChangedRevision: 151 $ <br>
  *          $LastChangedDate: 2013-06-20 12:39:55 +0200 (Do, 20 Jun 2013) $
- * @author <a href="mailto:m.shahabi@osb-ag.de">$Author: mohammad.shahabi $</a><br>
+ * @author <a href="mailto:m.m.shahabi@gmail.com">$Author: mohammad.shahabi $</a><br>
  */
 public final class DeleteConfirmation {
 
