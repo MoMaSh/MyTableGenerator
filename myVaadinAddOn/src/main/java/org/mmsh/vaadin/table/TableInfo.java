@@ -49,7 +49,7 @@ public abstract class TableInfo implements Serializable {
 	private List<MyColumn> columns = new ArrayList<MyColumn>();
 	
 	/** The generated columns. */
-	private List<GeneratedColumn> generatedColumns;
+	private List<CustomColumn> generatedColumns;
 	
 	/** The is immediate search. */
 	private boolean isImmediateSearch = true;
@@ -264,7 +264,7 @@ public abstract class TableInfo implements Serializable {
 	 * 
 	 * @return The generated columns
 	 */
-	public final List<GeneratedColumn> getGeneratedColumns() {
+	public final List<CustomColumn> getGeneratedColumns() {
 		return generatedColumns;
 	}
 
@@ -274,7 +274,7 @@ public abstract class TableInfo implements Serializable {
 	 * @param pGeneratedColumns
 	 *            The new generated columns
 	 */
-	public final void setGeneratedColumns(final List<GeneratedColumn> pGeneratedColumns) {
+	public final void setGeneratedColumns(final List<CustomColumn> pGeneratedColumns) {
 		this.generatedColumns = pGeneratedColumns;
 	}
 

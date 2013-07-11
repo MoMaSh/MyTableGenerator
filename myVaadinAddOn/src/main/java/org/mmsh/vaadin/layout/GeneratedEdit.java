@@ -7,15 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Id;
 
 import org.mmsh.vaadin.MyUI;
-import org.mmsh.vaadin.common.MyEditTypeAnnot;
 import org.mmsh.vaadin.common.MyUtil;
 import org.mmsh.vaadin.components.MyEdit;
 import org.mmsh.vaadin.components.MyTextField;
 import org.mmsh.vaadin.table.TableInfo;
 
 import com.vaadin.addon.jpacontainer.EntityItem;
+import com.vaadin.ui.AbstractField;
+import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.ColorPicker;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.DateField;
@@ -57,64 +59,88 @@ public class GeneratedEdit extends MyEdit {
 			setIdentification(Integer.parseInt(itemId.toString()));
 		}
 		
-		
-		
 		for (Field f : tableInfo.getClazz().getDeclaredFields()) {
-			MyEditTypeAnnot et = f.getAnnotation(MyEditTypeAnnot.class);
+			org.mmsh.vaadin.common.MyEdit et = f.getAnnotation(org.mmsh.vaadin.common.MyEdit.class);
 			Column c = f.getAnnotation(Column.class);
-			if (et != null) {
-				if (et.componentType() == MyTextField.class) {
-					MyTextField txtField = new MyTextField(et.caption(), c.nullable(), c.length());
-					if (entityItem != null) {
-						txtField.setPropertyDataSource(entityItem.getItemProperty(c.name()));
-					}
-					components.add(txtField);
-					fieldTypes.add(f.getType());
-					formLayout.addComponent(txtField);
-				} else if (et.componentType() == TextField.class) {
-					TextField txtField = new TextField(et.caption());
-					txtField.setRequired(c.nullable());
-					if (entityItem != null) {
-						txtField.setPropertyDataSource(entityItem.getItemProperty(c.name()));
-					}
-					components.add(txtField);
-					fieldTypes.add(f.getType());
-					formLayout.addComponent(txtField);
-				} else if (et.componentType() == DateField.class) {
-					DateField txtField = new DateField(et.caption());
-					txtField.setRequired(c.nullable());
-					if (entityItem != null) {
-						txtField.setPropertyDataSource(entityItem.getItemProperty(c.name()));
-					}
-					components.add(txtField);
-					fieldTypes.add(f.getType());
-					formLayout.addComponent(txtField);
-				} else if (et.componentType() == ColorPicker.class) {
+			Id id = f.getAnnotation(Id.class);
+			if (id == null && et != null && c != null ) {
+				if (et.componentType().equals(com.vaadin.ui.AbstractField.class)) {
 					
-					final ColorPicker colorPicker = new ColorPicker(et.caption());
-					final TextField tf = new TextField();
-					tf.setVisible(true);
-					if (entityItem != null) {
-						tf.setPropertyDataSource(entityItem.getItemProperty(c.name()));
+					AbstractField field = null;
+					if (f.getType() == String.class) {
+						field = new TextField(et.caption());
+					} else if (f.getType() == Integer.class) {
+						field = new TextField(et.caption());
+					} else if (f.getType() == Boolean.class) {
+						field = new CheckBox(et.caption());
+					} else {
+						field = new TextField(et.caption());
 					}
-					colorPicker.setColor(MyUtil.hex2Rgb(tf.getValue()));
-					colorPicker.addColorChangeListener(new ColorChangeListener() {
-						private static final long serialVersionUID = 5526794258192880020L;
-
-						@Override
-						public void colorChanged(ColorChangeEvent event) {
-							tf.setValue(colorPicker.getColor().getCSS());
+					
+					field.setRequired(c.nullable());
+					if (entityItem != null) {
+						field.setPropertyDataSource(entityItem.getItemProperty(c.name()));
+					}
+					field.setImmediate(false);
+					components.add(field);
+					fieldTypes.add(f.getType());
+					formLayout.addComponent(field);
+					
+				} else {
+					if (et.componentType() == MyTextField.class) {
+						MyTextField txtField = new MyTextField(et.caption(), c.nullable(), c.length());
+						if (entityItem != null) {
+							txtField.setPropertyDataSource(entityItem.getItemProperty(c.name()));
 						}
-					});
-					
-					components.add(tf);
-					fieldTypes.add(f.getType());
+						components.add(txtField);
+						fieldTypes.add(f.getType());
+						formLayout.addComponent(txtField);
+					} else if (et.componentType() == TextField.class) {
+						TextField txtField = new TextField(et.caption());
+						txtField.setRequired(c.nullable());
+						if (entityItem != null) {
+							txtField.setPropertyDataSource(entityItem.getItemProperty(c.name()));
+						}
+						components.add(txtField);
+						fieldTypes.add(f.getType());
+						formLayout.addComponent(txtField);
+					} else if (et.componentType() == DateField.class) {
+						DateField txtField = new DateField(et.caption());
+						txtField.setRequired(c.nullable());
+						if (entityItem != null) {
+							txtField.setPropertyDataSource(entityItem.getItemProperty(c.name()));
+						}
+						components.add(txtField);
+						fieldTypes.add(f.getType());
+						formLayout.addComponent(txtField);
+					} else if (et.componentType() == ColorPicker.class) {
+						
+						final ColorPicker colorPicker = new ColorPicker(et.caption());
+						final TextField tf = new TextField();
+						tf.setVisible(true);
+						if (entityItem != null) {
+							tf.setPropertyDataSource(entityItem.getItemProperty(c.name()));
+						}
+						colorPicker.setColor(MyUtil.hex2Rgb(tf.getValue()));
+						colorPicker.addColorChangeListener(new ColorChangeListener() {
+							private static final long serialVersionUID = 5526794258192880020L;
 
-					
-					formLayout.addComponent(tf);
-					formLayout.addComponent(colorPicker);
+							@Override
+							public void colorChanged(ColorChangeEvent event) {
+								tf.setValue(colorPicker.getColor().getCSS());
+							}
+						});
+						
+						components.add(tf);
+						fieldTypes.add(f.getType());
+
+						
+						formLayout.addComponent(tf);
+						formLayout.addComponent(colorPicker);
+					}
 				}
 			}
+			
 		}
 
 		
@@ -130,11 +156,20 @@ public class GeneratedEdit extends MyEdit {
 				try {
 					Constructor c = tableInfo.getClazz().getConstructor(fieldTypes.toArray(new Class[fieldTypes.size()]));
 					List<Object> list = new ArrayList<Object>();
+					int i = 0;
 					for (Object o : components) {
-						list.add(o.getClass().getMethod("getValue", null).invoke(o, null));
+						Object val = o.getClass().getMethod("getValue", null).invoke(o, null);
+						if (fieldTypes.get(i).equals(Integer.class)) {
+							list.add(Integer.parseInt(val.toString()));
+						} else {
+							list.add(val);
+						}
+						i++;
 					}
 					Integer id = (Integer) tableInfo.getJpaContainer().addEntity(c.newInstance(list.toArray(new Object[list.size()])));
 					setIdentification(id);
+					((MyUI) UI.getCurrent()).removeActiveEditPopupWindow();
+					Notification.show("Saved successfully");
 				} catch (NoSuchMethodException e1) {
 					e1.printStackTrace();
 				} catch (SecurityException e1) {
@@ -155,9 +190,9 @@ public class GeneratedEdit extends MyEdit {
 			} else {
 				EntityItem<?> ei = tableInfo.getJpaContainer().getItem(getIdentification());
 				ei.commit();
+				((MyUI) UI.getCurrent()).removeActiveEditPopupWindow();
+				Notification.show("Saved successfully");
 			}
-			((MyUI) UI.getCurrent()).removeActiveEditPopupWindow();
-			Notification.show("Saved successfully");
 		}
 	}
 

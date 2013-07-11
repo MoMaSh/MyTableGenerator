@@ -1,10 +1,9 @@
 package org.mmsh.vaadin.components;
 
 import org.mmsh.vaadin.MyUI;
-import org.mmsh.vaadin.common.MyTableAnnot;
-import org.mmsh.vaadin.table.GeneratedTableInfo;
 import org.mmsh.vaadin.table.MyTable;
 import org.mmsh.vaadin.table.TableInfo;
+import org.mmsh.vaadin.table.autogenerate.GenerateTableInfo;
 
 import com.vaadin.server.Page;
 import com.vaadin.server.ThemeResource;
@@ -66,9 +65,9 @@ public abstract class CommandButton extends MyButton {
 				} catch (IllegalAccessException e) {
 					e.printStackTrace();
 				} catch (ClassNotFoundException e) {
-					MyTableAnnot classAnnotation = clazz.getAnnotation(MyTableAnnot.class);
+					org.mmsh.vaadin.common.MyTable classAnnotation = clazz.getAnnotation(org.mmsh.vaadin.common.MyTable.class);
 					if (classAnnotation != null) {
-						tableInfo = new GeneratedTableInfo(clazz, true);
+						tableInfo = new GenerateTableInfo(clazz, true, true);
 					} else {
 						e.printStackTrace();
 					}

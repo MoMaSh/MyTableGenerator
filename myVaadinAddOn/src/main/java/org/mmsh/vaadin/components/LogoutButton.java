@@ -30,7 +30,7 @@ public abstract class LogoutButton extends MyButton {
 	 * and all popped up windows will be closed.
 	 */
 	public LogoutButton(final String userClassPath) {
-		super(new ThemeResource("osbImages/buttons/logout.png"));
+		super(new ThemeResource("myVaadin/buttons/logout.png"));
 		this.addClickListener(new Button.ClickListener() {
 			private static final long serialVersionUID = -6024482019178835620L;
 			@Override

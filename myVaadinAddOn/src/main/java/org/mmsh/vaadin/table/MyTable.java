@@ -307,7 +307,7 @@ public abstract class MyTable extends CustomComponent {
 		table.setVisibleColumns(visibleColumns);
 		
 		if (tableInfo.getGeneratedColumns() != null) {
-			for (GeneratedColumn gc : tableInfo.getGeneratedColumns()) {
+			for (CustomColumn gc : tableInfo.getGeneratedColumns()) {
 				table.addGeneratedColumn(gc.getColumnName(), gc.getColumn());
 				table.setColumnAlignment(gc.getColumnName(), gc.getColumnAlignment());
 				table.setColumnWidth(gc.getColumnName(), gc.getColumnWidth());

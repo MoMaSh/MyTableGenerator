@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.mmsh.vaadin</groupId>
 	<artifactId>MyVaadin</artifactId>
-	<version>0.5.2</version>
+	<version>0.5.2.2</version>
 	<name>MyVaadin Addon</name>
 
 	<properties>
@@ -171,14 +171,6 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.2</version>
-				<configuration>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-				</configuration>
-			</plugin>
-			<plugin>
 				<groupId>com.vaadin</groupId>
 				<artifactId>vaadin-maven-plugin</artifactId>
 				<version>${vaadin.plugin.version}</version>
@@ -187,10 +179,8 @@
 					<!-- <runTarget>mobilemail</runTarget> -->
 					<!-- We are doing "inplace" but into subdir VAADIN/widgetsets. This 
 						way compatible with Vaadin eclipse plugin. -->
-					<webappDirectory>${basedir}/src/main/webapp/VAADIN/widgetsets
-					</webappDirectory>
-					<hostedWebapp>${basedir}/src/main/webapp/VAADIN/widgetsets
-					</hostedWebapp>
+					<webappDirectory>${basedir}/src/main/webapp/VAADIN/widgetsets</webappDirectory>
+					<hostedWebapp>${basedir}/src/main/webapp/VAADIN/widgetsets</hostedWebapp>
 					<noServer>true</noServer>
 					<!-- Remove draftCompile when project is ready -->
 					<draftCompile>false</draftCompile>
@@ -230,14 +220,41 @@
 						<addMavenDescriptor>false</addMavenDescriptor>
 						<manifestEntries>
 							<Implementation-Title>MyVaadin</Implementation-Title>
-							<Implementation-Version>0.5.2</Implementation-Version>
+							<Implementation-Version>${this.version}</Implementation-Version>
 							<Vaadin-Package-Version>1</Vaadin-Package-Version>
 						</manifestEntries>
 					</archive>
 				</configuration>
 			</plugin>
-			
+					
+								
+<!-- 			<plugin> -->
+<!-- 		        <groupId>org.apache.maven.plugins</groupId> -->
+<!-- 		        <artifactId>maven-dependency-plugin</artifactId> -->
+<!-- 		        <version>2.8</version> -->
+<!-- 		        <executions> -->
+<!-- 		          <execution> -->
+<!-- 		            <id>copy-dependencies</id> -->
+<!-- 		            <phase>package</phase> -->
+<!-- 		            <goals> -->
+<!-- 		              <goal>copy-dependencies</goal> -->
+<!-- 		            </goals> -->
+<!-- 		            <configuration> -->
+<!-- 		              <outputDirectory>${project.build.directory}/alternateLocation</outputDirectory> -->
+<!-- 		              <overWriteReleases>false</overWriteReleases> -->
+<!-- 		              <overWriteSnapshots>true</overWriteSnapshots> -->
+<!-- 		              <excludeTransitive>true</excludeTransitive> -->
+<!-- 		            </configuration> -->
+<!-- 		          </execution> -->
+<!-- 		        </executions> -->
+<!-- 			</plugin>					 -->
+					
+					
+					
+					
 		</plugins>
+		
+		
 		<pluginManagement>
 			<plugins>
 				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
@@ -251,12 +268,8 @@
 								<pluginExecution>
 									<pluginExecutionFilter>
 										<groupId>com.vaadin</groupId>
-										<artifactId>
-											vaadin-maven-plugin
-										</artifactId>
-										<versionRange>
-											[7.1.0,)
-										</versionRange>
+										<artifactId>vaadin-maven-plugin</artifactId>
+										<versionRange>[7.1.0,)</versionRange>
 										<goals>
 											<goal>resources</goal>
 											<goal>update-widgetset</goal>
@@ -273,5 +286,9 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
+		
+		
+		
+		
 	</build>
 </project>

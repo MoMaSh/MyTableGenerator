@@ -188,6 +188,10 @@ public final class MyUtil {
 	public static void main(String[] args) {
 		hex2Rgb("#a22ed445");
 	}
+
+	public static String getCaption(String str) {
+		return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+	}
 	
 	
 	
