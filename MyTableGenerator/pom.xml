@@ -3,9 +3,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.vaadin.mytablegenerator</groupId>
-	<artifactId>MyVaadin</artifactId>
-	<version>0.5.4</version>
-	<name>MyVaadin Addon</name>
+	<artifactId>MyTableGenerator</artifactId>
+	<version>0.5.4.1</version>
+	<name>MyTableGenerator Addon</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -220,7 +220,7 @@
 						<addMavenDescriptor>false</addMavenDescriptor>
 						<manifestEntries>
 							<Implementation-Title>my-table-generator</Implementation-Title>
-							<Implementation-Version>0.5.4</Implementation-Version>
+							<Implementation-Version>0.5.4.1</Implementation-Version>
 							<Vaadin-Package-Version>1</Vaadin-Package-Version>
 						</manifestEntries>
 					</archive>
