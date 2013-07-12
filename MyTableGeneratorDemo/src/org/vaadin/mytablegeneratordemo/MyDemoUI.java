@@ -2,8 +2,8 @@ package org.vaadin.mytablegeneratordemo;
 
 import javax.servlet.annotation.WebServlet;
 
-import org.vaadin.myTableGenerator.MyUI;
-import org.vaadin.myTableGenerator.table.autogenerate.GenerateTableInPanel;
+import org.vaadin.mytablegenerator.MyUI;
+import org.vaadin.mytablegenerator.table.autogenerate.GenerateTableInPanel;
 import org.vaadin.mytablegeneratordemo.entities.Country;
 
 import com.vaadin.annotations.Theme;

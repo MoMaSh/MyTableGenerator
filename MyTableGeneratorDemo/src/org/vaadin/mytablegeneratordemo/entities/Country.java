@@ -13,8 +13,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
-import org.vaadin.myTableGenerator.common.MyEdit;
-import org.vaadin.myTableGenerator.common.MyTable;
+import org.vaadin.mytablegenerator.annotations.MyEdit;
+import org.vaadin.mytablegenerator.annotations.MyTable;
 
 @Entity
 @Table(name = "country", catalog = "mydemo", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
