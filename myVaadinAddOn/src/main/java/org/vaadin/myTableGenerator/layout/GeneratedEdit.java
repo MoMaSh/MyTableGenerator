@@ -4,21 +4,19 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 
 import org.vaadin.myTableGenerator.MyUI;
-import org.vaadin.myTableGenerator.common.MyUtil;
 import org.vaadin.myTableGenerator.components.MyEdit;
-import org.vaadin.myTableGenerator.components.MyTextField;
 import org.vaadin.myTableGenerator.table.TableInfo;
 
 import com.vaadin.addon.jpacontainer.EntityItem;
 import com.vaadin.ui.AbstractField;
 import com.vaadin.ui.CheckBox;
-import com.vaadin.ui.ColorPicker;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.FormLayout;
@@ -26,8 +24,6 @@ import com.vaadin.ui.Layout;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
-import com.vaadin.ui.components.colorpicker.ColorChangeEvent;
-import com.vaadin.ui.components.colorpicker.ColorChangeListener;
 
 /**
  * Description: The edit page for {@link Typ} which is of type {@link MyEdit2}.<br>
@@ -63,20 +59,32 @@ public class GeneratedEdit extends MyEdit {
 			Column c = f.getAnnotation(Column.class);
 			Id id = f.getAnnotation(Id.class);
 			if (id == null && et != null && c != null ) {
+				AbstractField field = null;
 				if (et.componentType().equals(com.vaadin.ui.AbstractField.class)) {
 					
-					AbstractField field = null;
 					if (f.getType() == String.class) {
 						field = new TextField(et.caption());
 					} else if (f.getType() == Integer.class) {
 						field = new TextField(et.caption());
 					} else if (f.getType() == Boolean.class) {
 						field = new CheckBox(et.caption());
+					} else if (f.getType() == Date.class) {
+						field = new DateField(et.caption());
 					} else {
 						field = new TextField(et.caption());
 					}
 					
-					field.setRequired(c.nullable());
+				} else {
+					if (et.componentType() == TextField.class) {
+						field = new TextField(et.caption());
+						field.setRequired(!c.nullable());
+					} else if (et.componentType() == DateField.class) {
+						field = new DateField(et.caption());
+					}
+				}
+				
+				if (field != null) {
+					field.setRequired(!c.nullable());
 					if (entityItem != null) {
 						field.setPropertyDataSource(entityItem.getItemProperty(c.name()));
 					}
@@ -84,59 +92,6 @@ public class GeneratedEdit extends MyEdit {
 					components.add(field);
 					fieldTypes.add(f.getType());
 					formLayout.addComponent(field);
-					
-				} else {
-					if (et.componentType() == MyTextField.class) {
-						MyTextField txtField = new MyTextField(et.caption(), c.nullable(), c.length());
-						if (entityItem != null) {
-							txtField.setPropertyDataSource(entityItem.getItemProperty(c.name()));
-						}
-						components.add(txtField);
-						fieldTypes.add(f.getType());
-						formLayout.addComponent(txtField);
-					} else if (et.componentType() == TextField.class) {
-						TextField txtField = new TextField(et.caption());
-						txtField.setRequired(c.nullable());
-						if (entityItem != null) {
-							txtField.setPropertyDataSource(entityItem.getItemProperty(c.name()));
-						}
-						components.add(txtField);
-						fieldTypes.add(f.getType());
-						formLayout.addComponent(txtField);
-					} else if (et.componentType() == DateField.class) {
-						DateField txtField = new DateField(et.caption());
-						txtField.setRequired(c.nullable());
-						if (entityItem != null) {
-							txtField.setPropertyDataSource(entityItem.getItemProperty(c.name()));
-						}
-						components.add(txtField);
-						fieldTypes.add(f.getType());
-						formLayout.addComponent(txtField);
-					} else if (et.componentType() == ColorPicker.class) {
-						
-						final ColorPicker colorPicker = new ColorPicker(et.caption());
-						final TextField tf = new TextField();
-						tf.setVisible(true);
-						if (entityItem != null) {
-							tf.setPropertyDataSource(entityItem.getItemProperty(c.name()));
-						}
-						colorPicker.setColor(MyUtil.hex2Rgb(tf.getValue()));
-						colorPicker.addColorChangeListener(new ColorChangeListener() {
-							private static final long serialVersionUID = 5526794258192880020L;
-
-							@Override
-							public void colorChanged(ColorChangeEvent event) {
-								tf.setValue(colorPicker.getColor().getCSS());
-							}
-						});
-						
-						components.add(tf);
-						fieldTypes.add(f.getType());
-
-						
-						formLayout.addComponent(tf);
-						formLayout.addComponent(colorPicker);
-					}
 				}
 			}
 			
@@ -146,7 +101,6 @@ public class GeneratedEdit extends MyEdit {
 		
 	}
 
-	
 	@SuppressWarnings("unchecked")
 	@Override
 	public final void saveAction(final TableInfo tableInfo) {
@@ -159,7 +113,11 @@ public class GeneratedEdit extends MyEdit {
 					for (Object o : components) {
 						Object val = o.getClass().getMethod("getValue", null).invoke(o, null);
 						if (fieldTypes.get(i).equals(Integer.class)) {
-							list.add(Integer.parseInt(val.toString()));
+							if ("".equals(val.toString())) {
+								list.add(null);
+							} else {
+								list.add(Integer.parseInt(val.toString()));
+							}
 						} else {
 							list.add(val);
 						}
