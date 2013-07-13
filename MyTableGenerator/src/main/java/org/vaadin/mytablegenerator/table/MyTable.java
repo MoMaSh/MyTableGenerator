@@ -294,7 +294,7 @@ public abstract class MyTable extends CustomComponent {
 			}
 		}
 		
-		String[] visibleColumns = new String[tableInfo.getColumns().size()];
+		Object[] visibleColumns = new Object[tableInfo.getColumns().size()];
 		for (int i = 0; i < tableInfo.getColumns().size(); i++) {
 			MyColumn column = tableInfo.getColumns().get(i);
 			visibleColumns[i] = column.getId();
@@ -304,7 +304,7 @@ public abstract class MyTable extends CustomComponent {
 			}
 		}
 		table.setVisibleColumns(visibleColumns);
-		
+				
 		if (tableInfo.getGeneratedColumns() != null) {
 			for (CustomColumn gc : tableInfo.getGeneratedColumns()) {
 				table.addGeneratedColumn(gc.getColumnName(), gc.getColumn());

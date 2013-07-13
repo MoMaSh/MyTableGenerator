@@ -13,4 +13,8 @@ import com.vaadin.ui.AbstractField;
 public @interface MyEdit {
 	public String caption() default "";
 	public Class<?> componentType() default AbstractField.class;
+	public String requiredMessage() default "";
+	public String validationMessage() default "";
+	public String validationRegex() default "";
+	public String format() default "";
 }

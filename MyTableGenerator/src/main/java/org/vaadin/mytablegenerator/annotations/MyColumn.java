@@ -14,4 +14,5 @@ public @interface MyColumn {
 	public boolean isExactMatch() default false;
 	public boolean isIgnoreCase() default true;
 	public int width() default -1;
+	public String format() default "";
 }

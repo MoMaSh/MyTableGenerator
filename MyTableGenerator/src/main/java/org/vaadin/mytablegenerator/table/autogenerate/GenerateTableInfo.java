@@ -85,9 +85,9 @@ public class GenerateTableInfo extends TableInfo {
 					}
 					String name = myColumn.name();
 					if ("".equals(name)) {
-						tableColumn = new MyColumn(id, myColumn.isSearchable(), myColumn.isExactMatch(), myColumn.isIgnoreCase(), myColumn.width());
+						tableColumn = new MyColumn(id, myColumn.isSearchable(), myColumn.isExactMatch(), myColumn.isIgnoreCase(), myColumn.width(), myColumn.format());
 					} else {
-						tableColumn = new MyColumn(id, myColumn.name(), myColumn.isSearchable(), myColumn.isExactMatch(), myColumn.isIgnoreCase(), myColumn.width());
+						tableColumn = new MyColumn(id, myColumn.name(), myColumn.isSearchable(), myColumn.isExactMatch(), myColumn.isIgnoreCase(), myColumn.width(), myColumn.format());
 					}
 					columnsList.add(tableColumn);
 					if (myColumn.id().contains(".")) {
@@ -103,9 +103,9 @@ public class GenerateTableInfo extends TableInfo {
 					Id id = f.getAnnotation(Id.class);
 					// TODO better to find a way to get isSearchable, isExactMatch, isIgnoreCase and width from MyColumn annotation
 					if (id != null && column != null && includeId) {
-						columnsList.add(new MyColumn(f.getName(), MyUtil.getCaption(column.name()), true, false, true, -1));
+						columnsList.add(new MyColumn(f.getName(), MyUtil.getCaption(column.name()), true, false, true, -1, ""));
 					} else if (id == null && column != null) {
-						columnsList.add(new MyColumn(f.getName(), MyUtil.getCaption(column.name()), true, false, true, -1));
+						columnsList.add(new MyColumn(f.getName(), MyUtil.getCaption(column.name()), true, false, true, -1, ""));
 					}
 				}
 			}

@@ -37,13 +37,19 @@ public class MyColumn implements Serializable {
 	/** The width. */
 	private int width;
 	
+	private String format;
+	
+	public  MyColumn(final String pId) {
+		this(pId, true, false, "");
+	}
+
 	/**
 	 * Instantiates a new MyColumn object.
 	 * 
 	 * @param pId The id.
 	 */
-	public  MyColumn(final String pId) {
-		this(pId, true, false);
+	public  MyColumn(final String pId, final String format) {
+		this(pId, true, false, format);
 	}
 	
 	/**
@@ -51,8 +57,8 @@ public class MyColumn implements Serializable {
 	 * 
 	 * @param pId The id.
 	 */
-	public  MyColumn(final String pId, boolean pIsSearchable) {
-		this(pId, pIsSearchable, false);
+	public  MyColumn(final String pId, boolean pIsSearchable, final String format) {
+		this(pId, pIsSearchable, false, format);
 	}
 	
 	/**
@@ -62,8 +68,8 @@ public class MyColumn implements Serializable {
 	 * @param pIsSearchable The is searchable.
 	 * @param pIsExactMatch The is exact match.
 	 */
-	public  MyColumn(final String pId, final boolean pIsSearchable, final boolean pIsExactMatch) {
-		this(pId, "", pIsSearchable, pIsExactMatch, -1);
+	public  MyColumn(final String pId, final boolean pIsSearchable, final boolean pIsExactMatch, final String format) {
+		this(pId, "", pIsSearchable, pIsExactMatch, -1, format);
 		setCorrectName(pId);
 	}
 
@@ -88,8 +94,8 @@ public class MyColumn implements Serializable {
 	 * @param pIsExactMatch The is exact match.
 	 * @param pWidth The width.
 	 */
-	public  MyColumn(final String pId, final boolean pIsSearchable, final boolean pIsExactMatch, final boolean pIsIgnoreCase, final int pWidth) {
-		this(pId, "", pIsSearchable, pIsExactMatch, true, pWidth);
+	public  MyColumn(final String pId, final boolean pIsSearchable, final boolean pIsExactMatch, final boolean pIsIgnoreCase, final int pWidth, final String format) {
+		this(pId, "", pIsSearchable, pIsExactMatch, true, pWidth, format);
 		setCorrectName(pId);
 	}
 
@@ -99,8 +105,8 @@ public class MyColumn implements Serializable {
 	 * @param pId The id.
 	 * @param pName The name.
 	 */
-	public  MyColumn(final String pId, final String pName) {
-		this(pId, pName, true, false, -1);
+	public  MyColumn(final String pId, final String pName, final String format) {
+		this(pId, pName, true, false, -1, format);
 	}
 	
 	/**
@@ -110,8 +116,8 @@ public class MyColumn implements Serializable {
 	 * @param pName The name.
 	 * @param pIsSearchable The is searchable.
 	 */
-	public  MyColumn(final String pId, final String pName, final boolean pIsSearchable) {
-		this(pId, pName, pIsSearchable, false, -1);
+	public  MyColumn(final String pId, final String pName, final boolean pIsSearchable, final String format) {
+		this(pId, pName, pIsSearchable, false, -1, format);
 	}
 	
 	/**
@@ -122,8 +128,8 @@ public class MyColumn implements Serializable {
 	 * @param pIsSearchable The is searchable.
 	 * @param pIsExactMatch The is exact match.
 	 */
-	public  MyColumn(final String pId, final String pName, final boolean pIsSearchable, final boolean pIsExactMatch) {
-		this(pId, pName, pIsSearchable, pIsExactMatch, -1);
+	public  MyColumn(final String pId, final String pName, final boolean pIsSearchable, final boolean pIsExactMatch, final String format) {
+		this(pId, pName, pIsSearchable, pIsExactMatch, -1, format);
 	}
 	
 	/**
@@ -134,21 +140,8 @@ public class MyColumn implements Serializable {
 	 * @param pIsSearchable The is searchable.
 	 * @param pWidth The width.
 	 */
-	public  MyColumn(final String pId, final String pName, final boolean pIsSearchable, final int pWidth) {
-		this(pId, pName, pIsSearchable, false, pWidth);
-	}
-	
-	/**
-	 * Instantiates a new MyColumn object.
-	 * 
-	 * @param pId The id.
-	 * @param pName The name.
-	 * @param pIsSearchable The is searchable.
-	 * @param pIsExactMatch The is exact match.
-	 * @param pWidth The width.
-	 */
-	public  MyColumn(final String pId, final String pName, final boolean pIsSearchable, final boolean pIsExactMatch, final int pWidth) {
-		this(pId, pName, pIsSearchable, pIsExactMatch, true, pWidth);
+	public  MyColumn(final String pId, final String pName, final boolean pIsSearchable, final int pWidth, final String format) {
+		this(pId, pName, pIsSearchable, false, pWidth, format);
 	}
 	
 	/**
@@ -160,12 +153,26 @@ public class MyColumn implements Serializable {
 	 * @param pIsExactMatch The is exact match.
 	 * @param pWidth The width.
 	 */
-	public  MyColumn(final String pId, final String pName, final boolean pIsSearchable, final boolean pIsExactMatch, final boolean pIsIgnoreCase, final int pWidth) {
+	public  MyColumn(final String pId, final String pName, final boolean pIsSearchable, final boolean pIsExactMatch, final int pWidth, final String format) {
+		this(pId, pName, pIsSearchable, pIsExactMatch, true, pWidth, format);
+	}
+	
+	/**
+	 * Instantiates a new MyColumn object.
+	 * 
+	 * @param pId The id.
+	 * @param pName The name.
+	 * @param pIsSearchable The is searchable.
+	 * @param pIsExactMatch The is exact match.
+	 * @param pWidth The width.
+	 */
+	public  MyColumn(final String pId, final String pName, final boolean pIsSearchable, final boolean pIsExactMatch, final boolean pIsIgnoreCase, final int pWidth, final String format) {
 		this.id = pId;
 		this.name = pName;
 		this.isSearchable = pIsSearchable;
 		this.width = pWidth;
 		this.isExactMatch = pIsExactMatch;
+		this.format = format;
 	}
 	
 	/**
@@ -276,6 +283,14 @@ public class MyColumn implements Serializable {
 	 */
 	public final void setIgnoreCase(final boolean pIsIgnoreCase) {
 		this.isIgnoreCase = pIsIgnoreCase;
+	}
+
+	public String getFormat() {
+		return format;
+	}
+
+	public void setFormat(String format) {
+		this.format = format;
 	}
 
 }
