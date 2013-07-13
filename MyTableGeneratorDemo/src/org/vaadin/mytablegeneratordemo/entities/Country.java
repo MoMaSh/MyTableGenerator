@@ -12,9 +12,14 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 import org.vaadin.mytablegenerator.annotations.MyEdit;
 import org.vaadin.mytablegenerator.annotations.MyTable;
+
+import com.sun.istack.internal.NotNull;
 
 @Entity
 @Table(name = "country", catalog = "mydemo", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
@@ -25,9 +30,12 @@ public class Country implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
+	@NotNull
 	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
 	
+	@NotNull
+	@Size(min=2, max=10, message = "SIZEEJAS:KJ")
 	@Column(name = "name", unique = true, nullable = false, length = 100)
 	@MyEdit(caption = "Name")
 	private String name;
@@ -41,7 +49,9 @@ public class Country implements java.io.Serializable {
 	@MyEdit(caption = "Last Update")
 	private Date lastUpdate;
 	
-	@Column(name = "year")
+	@Min(value = 1990, message = "MMINNNNn")
+	@Max(value = 2013, message = "Maxxax")
+	@Column(name = "year", length = 4)
 	@MyEdit(caption = "Year")
 	private Integer year;
 

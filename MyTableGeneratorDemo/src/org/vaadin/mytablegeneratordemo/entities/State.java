@@ -16,6 +16,8 @@ import javax.persistence.Table;
 @Table(name = "state", catalog = "mydemo")
 public class State implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1768393609546557820L;
+	
 	private Integer id;
 	private String name;
 	private int countryId;

@@ -18,12 +18,14 @@
 <!-- 			<property name="hibernate.show_sql" value="true" /> -->
 			<property name="hibernate.connection.username" value="root" />
 			
-			<property name="hibernate.connection.password" value="7F3SK0fSFP" />
-			<property name="hibernate.connection.url" value="jdbc:mysql://mysql-env-1367435.jelastic.servint.net/mydemo" />
+<!-- 			<property name="hibernate.connection.password" value="7F3SK0fSFP" /> -->
+<!-- 			<property name="hibernate.connection.url" value="jdbc:mysql://mysql-env-1367435.jelastic.servint.net/mydemo" /> -->
 			
 			
-<!-- 			<property name="hibernate.connection.password" value="1944993367" /> -->
-<!-- 			<property name="hibernate.connection.url" value="jdbc:mysql://127.0.0.1:3306/myDemo" /> -->
+			<property name="hibernate.connection.password" value="" />
+			<property name="hibernate.connection.url" value="jdbc:mysql://127.0.0.1:3306/mydemo" />
+
+
 			<property name="hibernate.max_fetch_depth" value="3" />
 		</properties>
 	</persistence-unit>

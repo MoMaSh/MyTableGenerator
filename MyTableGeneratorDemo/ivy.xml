@@ -49,6 +49,8 @@
 		<dependency org="org.vaadin.addons" name="csvalidation" rev="0.5.1" />
 		<dependency org="org.vaadin.addon" name="confirmdialog" rev="2.0.4" />
 		
+	<dependency org="javax.validation" name="validation-api" rev="1.1.0.Final"/>
+	
 		<dependency org="org.vaadin.addons" name="my-table-generator" rev="0.5.4.1" />		
 		
 	</dependencies>

@@ -26,15 +26,11 @@ public class MyDemoUI extends MyUI {
 	@Override
 	protected void init(VaadinRequest request) {
 		Page.getCurrent().setTitle("MyTableGeneratorDemo");
-		
 		VerticalLayout vl = new VerticalLayout();
-		
 		GenerateTableInPanel p = new GenerateTableInPanel(Country.class);
 		p.setWidth("90%");
 		vl.addComponent(p);
-		
 		vl.setComponentAlignment(p, Alignment.MIDDLE_CENTER);
-		
 		setSizeUndefined();
 		setContent(vl);
 	}

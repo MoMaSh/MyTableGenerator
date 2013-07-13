@@ -18,6 +18,8 @@ import javax.persistence.UniqueConstraint;
 		"name", "state_id" }))
 public class City implements java.io.Serializable {
 
+	private static final long serialVersionUID = -5071829242980695169L;
+	
 	private Integer id;
 	private String name;
 	private int stateId;
