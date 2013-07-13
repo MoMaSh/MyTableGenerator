@@ -12,7 +12,7 @@ import javax.persistence.Id;
 
 import org.vaadin.mytablegenerator.MyUI;
 import org.vaadin.mytablegenerator.components.MyEdit;
-import org.vaadin.mytablegenerator.components.MyIntegerField;
+import org.vaadin.mytablegenerator.components.MyNumberField;
 import org.vaadin.mytablegenerator.components.MyTextField;
 import org.vaadin.mytablegenerator.table.TableInfo;
 
@@ -102,7 +102,7 @@ public class GeneratedEdit extends MyEdit {
 							validationRegex = et.validationRegex();
 						}
 						
-						field = new MyIntegerField(et.caption(), required, requiredMsg, c.length(), validationRegex, validationMsg, et.format());
+						field = new MyNumberField(et.caption(), required, requiredMsg, c.length(), validationRegex, validationMsg, et.format());
 						
 					} else if (f.getType() == Boolean.class) {
 						field = new CheckBox(et.caption());
@@ -167,18 +167,17 @@ public class GeneratedEdit extends MyEdit {
 					}
 					Integer id = (Integer) tableInfo.getJpaContainer().addEntity(c.newInstance(list.toArray(new Object[list.size()])));
 					setIdentification(id);
-					((MyUI) UI.getCurrent()).removeActiveEditPopupWindow();
-					Notification.show("Saved successfully");
+//					((MyUI) UI.getCurrent()).removeActiveEditPopupWindow();
+//					Notification.show("Saved successfully");
 				} catch (NoSuchMethodException | SecurityException | UnsupportedOperationException | IllegalStateException
 						| InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 					e.printStackTrace();
 				}
-			} else {
+//			} else {
 				//						EntityItem<?> ei = tableInfo.getJpaContainer().getItem(getIdentification());
 				//						ei.commit();
-				((MyUI) UI.getCurrent()).removeActiveEditPopupWindow();
-				Notification.show("Saved successfully" + getErrorMessage());
-
+//				((MyUI) UI.getCurrent()).removeActiveEditPopupWindow();
+//				Notification.show("Saved successfully" + getErrorMessage());
 			}
 		}
 	}

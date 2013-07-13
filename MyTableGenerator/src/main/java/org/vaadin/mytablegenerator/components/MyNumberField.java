@@ -1,7 +1,5 @@
 package org.vaadin.mytablegenerator.components;
 
-import org.vaadin.csvalidation.CSValidator;
-import com.vaadin.data.validator.RegexpValidator;
 import com.vaadin.ui.TextField;
 
 /**
@@ -17,33 +15,28 @@ import com.vaadin.ui.TextField;
  */
 public class MyNumberField extends TextField {
 
-	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -7390942553316386175L;
 
-	/**
-	 * Instantiates a new MyNumberField object.
-	 * 
-	 * @param caption
-	 *            The caption
-	 * @param validationMessage
-	 *            The validation message
-	 * @param required 
-	 */
-	public MyNumberField(final String caption, final boolean required) {
-		this.setCaption(caption);
-		CSValidator validator = new CSValidator();
-		validator.extend(this);
-		String regexp = "\\d{0,11}";
-		if (required) {
-			regexp = "\\d{1,11}";
-			this.setRequired(true);
-			this.setRequiredError("Eintrag darf nicht leer sein.");
-		}
-		validator.setRegExp(regexp);
-		validator.setErrorMessage("muss eine Zahl sein");
-		this.addValidator(new RegexpValidator(regexp, "muss eine Zahl sein"));
-		this.setImmediate(true);
+	public MyNumberField(String caption, boolean required, String requiredMsg, int length, String validationRegex, String validationMsg, String format) {
+		super(caption);
+		setNullRepresentation("");
+
+		// TODO Add the formatting here
+		
+		
+		// FIXME These two regexes does not work
+		
+//		int minDigit = 0;
+//		if (required) {
+//			minDigit = 1;
+//		}
+//		int maxDigit = length + (length / 3);
+//		String lengthRegex = "^\\S{" + minDigit + "," + maxDigit + "}$";
+//		this.addValidator(new RegexpValidator(lengthRegex, requiredMsg));
+		
+//		this.addValidator(new RegexpValidator(validationRegex, validationMsg));
+		
 	}
 
-	
+
 }
