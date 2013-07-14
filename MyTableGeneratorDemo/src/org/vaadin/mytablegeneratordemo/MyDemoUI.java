@@ -5,6 +5,7 @@ import javax.servlet.annotation.WebServlet;
 import org.vaadin.mytablegenerator.MyUI;
 import org.vaadin.mytablegenerator.table.autogenerate.GenerateTableInPanel;
 import org.vaadin.mytablegeneratordemo.entities.Country;
+import org.vaadin.mytablegeneratordemo.entities.State;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -27,10 +28,20 @@ public class MyDemoUI extends MyUI {
 	protected void init(VaadinRequest request) {
 		Page.getCurrent().setTitle("MyTableGeneratorDemo");
 		VerticalLayout vl = new VerticalLayout();
-		GenerateTableInPanel p = new GenerateTableInPanel(Country.class);
-		p.setWidth("90%");
-		vl.addComponent(p);
-		vl.setComponentAlignment(p, Alignment.MIDDLE_CENTER);
+		
+
+		GenerateTableInPanel countryPanel = new GenerateTableInPanel(Country.class);
+		countryPanel.setWidth("90%");
+		vl.addComponent(countryPanel);
+		vl.setComponentAlignment(countryPanel, Alignment.MIDDLE_CENTER);
+		
+		GenerateTableInPanel statePanel = new GenerateTableInPanel(State.class);
+		statePanel.setWidth("90%");
+		vl.addComponent(statePanel);
+		vl.setComponentAlignment(statePanel, Alignment.MIDDLE_CENTER);
+
+		
+		
 		setSizeUndefined();
 		setContent(vl);
 	}
