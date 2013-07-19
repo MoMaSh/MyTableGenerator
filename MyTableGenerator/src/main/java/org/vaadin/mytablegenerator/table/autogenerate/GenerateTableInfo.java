@@ -23,7 +23,7 @@ import com.vaadin.addon.jpacontainer.JPAContainerFactory;
  * Description: The specific information about each {@link MyTable} that is supposed to be created.<br>
  * The visible columns, generated columns, searchability of each column, ...<br>
  * Filename: TableInfo.java <br>
- * 
+ *
  * @since 18.06.2013 <br>
  * @version <br>
  *          $LastChangedRevision: 151 $ <br>
@@ -34,9 +34,9 @@ public class GenerateTableInfo extends TableInfo {
 	private static final long serialVersionUID = -28713779327451123L;
 
 	public GenerateTableInfo(Class<?> clazz, boolean shallGenerate, boolean includeId) {
-		
+
 		this.setClazz(clazz);
-		
+
 		MyTable myTable = clazz.getAnnotation(MyTable.class);
 		Table table = clazz.getAnnotation(Table.class);
 
@@ -45,7 +45,7 @@ public class GenerateTableInfo extends TableInfo {
 		String persistenceName = "";
 		int width = -1;
 		int height = -1;
-		
+
 		if (myTable != null) {
 			caption = myTable.caption();
 			popupCaption = myTable.popupCaption();
@@ -58,12 +58,12 @@ public class GenerateTableInfo extends TableInfo {
 		} else {
 			popupCaption = MyUtil.getCaption(table.name());
 			caption = popupCaption + "s";
-			// TODO better to find a way to get width and height from MyTable annotation 
+			// TODO better to find a way to get width and height from MyTable annotation default values
 			width = 300;
 			height = 200;
 			persistenceName = table.catalog();
 		}
-		
+
 		this.setCaption(caption);
 		this.setPopupEditCaption(popupCaption);
 		this.setPopupEditWidth(width);
@@ -71,9 +71,9 @@ public class GenerateTableInfo extends TableInfo {
 		this.setJpaContainer(JPAContainerFactory.make(clazz, persistenceName));
 
 		if (shallGenerate) {
-			List<MyColumn> columnsList = new ArrayList<MyColumn>();	
+			List<MyColumn> columnsList = new ArrayList<MyColumn>();
 			List<String> nested = new ArrayList<String>();
-			
+
 			boolean containsAnnot = false;
 			for (Field f : clazz.getDeclaredFields()) {
 				org.vaadin.mytablegenerator.annotations.MyColumn myColumn = f.getAnnotation(org.vaadin.mytablegenerator.annotations.MyColumn.class);
@@ -96,11 +96,15 @@ public class GenerateTableInfo extends TableInfo {
 					containsAnnot = true;
 				}
 			}
-			
+
 			if (!containsAnnot) {
 				for (Field f : clazz.getDeclaredFields()) {
 					Column column = f.getAnnotation(Column.class);
 					Id id = f.getAnnotation(Id.class);
+
+					// TODO for showing the sublist
+					// OneToMany o2m = f.getAnnotation(OneToMany.class);
+
 					// TODO better to find a way to get isSearchable, isExactMatch, isIgnoreCase and width from MyColumn annotation
 					if (id != null && column != null && includeId) {
 						columnsList.add(new MyColumn(f.getName(), MyUtil.getCaption(column.name()), true, false, true, -1, ""));
@@ -114,7 +118,7 @@ public class GenerateTableInfo extends TableInfo {
 			this.setNestedProperties(nested.toArray(new String[nested.size()]));
 		}
 	}
-	
+
 	@Override
 	public MyEdit getEditComponent(Object itemId) {
 		return new GeneratedEdit(this, itemId);

@@ -17,16 +17,16 @@ import javax.persistence.UniqueConstraint;
 public class City implements java.io.Serializable {
 
 	private static final long serialVersionUID = 3411679817638089139L;
-	
+
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "stateId", nullable = false)
 	private State state;
-	
+
 	@Column(name = "name", unique = true, length = 45)
 	private String name;
 

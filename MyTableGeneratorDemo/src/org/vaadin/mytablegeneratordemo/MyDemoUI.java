@@ -28,22 +28,21 @@ public class MyDemoUI extends MyUI {
 	protected void init(VaadinRequest request) {
 		Page.getCurrent().setTitle("MyTableGeneratorDemo");
 		VerticalLayout vl = new VerticalLayout();
-		
+
 
 		GenerateTableInPanel countryPanel = new GenerateTableInPanel(Country.class);
 		countryPanel.setWidth("90%");
 		vl.addComponent(countryPanel);
 		vl.setComponentAlignment(countryPanel, Alignment.MIDDLE_CENTER);
-		
+
 		GenerateTableInPanel statePanel = new GenerateTableInPanel(State.class);
 		statePanel.setWidth("90%");
 		vl.addComponent(statePanel);
 		vl.setComponentAlignment(statePanel, Alignment.MIDDLE_CENTER);
 
-		
-		
+
+
 		setSizeUndefined();
 		setContent(vl);
 	}
-
 }

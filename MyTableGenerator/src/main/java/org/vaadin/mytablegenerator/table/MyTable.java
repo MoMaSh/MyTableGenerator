@@ -42,7 +42,7 @@ import com.vaadin.ui.VerticalLayout;
  * Description: The table component including Search, Table, Action Buttons.<br>
  * <br>
  * Filename: MyTable.java <br>
- * 
+ *
  * @since 18.06.2013 <br>
  * @version <br>
  *          $LastChangedRevision: 157 $ <br>
@@ -56,58 +56,58 @@ public abstract class MyTable extends CustomComponent {
 
 	/** The main layout. */
 	private VerticalLayout mainLayout;
-	
+
 	/** The action buttons hl. */
 	private HorizontalLayout actionButtonsHL;
-	
+
 	/** The btn print export. */
 	private MyButton btnPrintExport;
-	
+
 	/** The hl expand. */
 	private HorizontalLayout hlExpand;
-	
+
 	/** The btn cancel. */
 	private CancelButton btnCancel;
-	
+
 	/** The btn save. */
 	private MyButton btnSave;
-	
+
 	/** The btn add. */
 	private MyButton btnAdd;
-	
+
 	/** The btn import. */
 	private MyButton btnImport;
-	
+
 	/** The btn delete multiple. */
 	private MyButton btnDeleteMultiple;
-	
+
 	/** The btn new. */
 	private MyButton btnNew;
-	
+
 	/** The table. */
 	private Table table;
-	
+
 	/** The search component hl. */
 	private HorizontalLayout searchComponentHL;
-	
+
 	/** The btn search. */
 	private Button btnSearch;
-	
+
 	/** The search texts layout. */
 	private HorizontalLayout searchTextsLayout;
 
 	/** The table info. */
 	private TableInfo tableInfo;
-	
+
 	/** The parent table. */
 	private Table parentTable;
-	
+
 	/** The selected item id. */
 	private Object selectedItemId;
 
 	/**
 	 * Instantiates a new MyTable object.
-	 * 
+	 *
 	 * @param pTableInfo
 	 *            The {@link TableInfo} of this table view.
 	 */
@@ -117,32 +117,32 @@ public abstract class MyTable extends CustomComponent {
 
 	/**
 	 * Instantiates a new MyTable object.
-	 * 
+	 *
 	 * @param pTableInfo
 	 *            The {@link TableInfo} of this table view.
 	 * @param pParentTable
 	 *            The parent table which is useful when having a list pop-up and the table which <br>
-	 *            leads to it is also needed. 
+	 *            leads to it is also needed.
 	 * @param pSelectedItemId
 	 *            The selected item id
 	 */
 	public MyTable(final TableInfo pTableInfo, final Table pParentTable, final Object pSelectedItemId) {
-		
+
 		this.tableInfo = pTableInfo;
 		this.parentTable = pParentTable;
 		this.selectedItemId = pSelectedItemId;
 
-		
+
 		mainLayout = new VerticalLayout();
 		mainLayout.setSizeFull();
 		mainLayout.setMargin(true);
 
 		setSizeFull();
-		
+
 		generateSearch();
-		
+
 		generateTable();
-		
+
 		actionButtonsHL = new HorizontalLayout();
 		actionButtonsHL.setWidth("100.0%");
 		actionButtonsHL.setMargin(true);
@@ -189,7 +189,7 @@ public abstract class MyTable extends CustomComponent {
 		actionButtonsHL.addComponent(hlExpand);
 		actionButtonsHL.setExpandRatio(hlExpand, 1.0f);
 
-		
+
 		/*
 		 * Add Button
 		 */
@@ -208,7 +208,7 @@ public abstract class MyTable extends CustomComponent {
 			} else {
 				btnPrintExport.setVisible(false);
 			}
-			
+
 			StreamSource stream = new StreamSource() {
 				private static final long serialVersionUID = -712525138090838610L;
 				@Override
@@ -221,7 +221,7 @@ public abstract class MyTable extends CustomComponent {
 						f.deleteOnExit();
 					} catch (FileNotFoundException e) {
 					} catch (Exception e) {
-					} 
+					}
 					return fis;
 				}
 			};
@@ -237,7 +237,7 @@ public abstract class MyTable extends CustomComponent {
 
 			@Override
 			public void valueChange(final ValueChangeEvent event) {
-				
+
 				if (table.isMultiSelect()) {
 					@SuppressWarnings("unchecked")
 					Collection<Object> itemsSelected = (Collection<Object>) table.getValue();
@@ -262,9 +262,9 @@ public abstract class MyTable extends CustomComponent {
 		mainLayout.addComponent(actionButtonsHL);
 
 		setCompositionRoot(mainLayout);
-		
+
 		table.setEditable(pTableInfo.isInlineEdit());
-		
+
 		for (Filter filter : pTableInfo.getJPAFilters()) {
 			pTableInfo.getJpaContainer().addContainerFilter(filter);
 		}
@@ -274,26 +274,28 @@ public abstract class MyTable extends CustomComponent {
 	 * Setup the {@link Table}.
 	 */
 	private void generateTable() {
-		
+
 		table = new Table();
 		table.setSizeFull();
 		mainLayout.addComponent(table);
 		mainLayout.setExpandRatio(table, 1.0f);
-		mainLayout.setComponentAlignment(table, new Alignment(20));
-		
+		mainLayout.setComponentAlignment(table, Alignment.MIDDLE_CENTER);
+
 		table.setSelectable(tableInfo.isSelectable());
 		table.setMultiSelect(tableInfo.isMultiSelect());
+
 		table.setImmediate(true);
+
 		table.setFooterVisible(true);
 		table.setColumnReorderingAllowed(true);
 		table.setContainerDataSource(tableInfo.getJpaContainer());
-		
+
 		if (tableInfo.getNestedProperties().length > 0) {
 			for (String nestedProp : tableInfo.getNestedProperties()) {
 				tableInfo.getJpaContainer().addNestedContainerProperty(nestedProp);
 			}
 		}
-		
+
 		Object[] visibleColumns = new Object[tableInfo.getColumns().size()];
 		for (int i = 0; i < tableInfo.getColumns().size(); i++) {
 			MyColumn column = tableInfo.getColumns().get(i);
@@ -304,7 +306,7 @@ public abstract class MyTable extends CustomComponent {
 			}
 		}
 		table.setVisibleColumns(visibleColumns);
-				
+
 		if (tableInfo.getGeneratedColumns() != null) {
 			for (CustomColumn gc : tableInfo.getGeneratedColumns()) {
 				table.addGeneratedColumn(gc.getColumnName(), gc.getColumn());
@@ -312,7 +314,7 @@ public abstract class MyTable extends CustomComponent {
 				table.setColumnWidth(gc.getColumnName(), gc.getColumnWidth());
 			}
 		}
-		
+
 		if (tableInfo.isEditable()) {
 			ColumnGenerator editColumn = generateEditColumn();
 			table.addGeneratedColumn("Edit", editColumn);
@@ -326,13 +328,13 @@ public abstract class MyTable extends CustomComponent {
 			table.setColumnAlignment("Delete", Align.CENTER);
 			table.setColumnWidth("Delete", 60);
 		}
-		
-		
+
+
 	}
 
 	/**
 	 * Generate edit column.
-	 * 
+	 *
 	 * @return The "Edit" Generated column.
 	 */
 	private ColumnGenerator generateEditColumn() {
@@ -347,7 +349,7 @@ public abstract class MyTable extends CustomComponent {
 					private static final long serialVersionUID = -7781579576610805407L;
 					public void buttonClick(final ClickEvent event) {
 						((MyUI) UI.getCurrent()).showEditPopup(new EditPopupWindow(tableInfo, itemId, Type.EDIT));
-					} 
+					}
 				});
 				editCell.setIcon(new ThemeResource("myVaadin/icons/edit.png"));
 				editCell.addStyleName("link");
@@ -355,10 +357,10 @@ public abstract class MyTable extends CustomComponent {
 			}
 		};
 	}
-	
+
 	/**
 	 * Generate delete column.
-	 * 
+	 *
 	 * @return The "Delete" Generated column.
 	 */
 	private ColumnGenerator generateDeleteColumn() {
@@ -382,7 +384,7 @@ public abstract class MyTable extends CustomComponent {
 		};
 	}
 
-	
+
 	private boolean hasSearchField() {
 		for (MyColumn column : tableInfo.getColumns()) {
 			if (column.isSearchable()) {
@@ -391,21 +393,21 @@ public abstract class MyTable extends CustomComponent {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Generate search components including "Search button" and {@link SearchText}s.
 	 */
 	private void generateSearch() {
 		if (hasSearchField()) {
-		
+
 			searchComponentHL = new HorizontalLayout();
 			searchComponentHL.setMargin(true);
 			searchComponentHL.setSpacing(true);
-			
+
 			searchTextsLayout = new HorizontalLayout();
 			searchTextsLayout.setSpacing(true);
 			searchComponentHL.addComponent(searchTextsLayout);
-			
+
 			btnSearch = new MyButton(new ThemeResource("myVaadin/icons/search.png"));
 			btnSearch.setImmediate(true);
 			searchComponentHL.addComponent(btnSearch);
@@ -413,7 +415,7 @@ public abstract class MyTable extends CustomComponent {
 			mainLayout.setComponentAlignment(searchComponentHL, new Alignment(6));
 
 			final List<SearchText> stfs = new ArrayList<SearchText>();
-			
+
 			if (!tableInfo.isImmediateSearch()) {
 				btnSearch.addClickListener(new ClickListener() {
 					private static final long serialVersionUID = 5396737083597044287L;
@@ -425,19 +427,19 @@ public abstract class MyTable extends CustomComponent {
 			} else {
 				btnSearch.setVisible(false);
 			}
-			
+
 			for (MyColumn column : tableInfo.getColumns()) {
 				if (column.isSearchable()) {
 					final SearchText searchField = new SearchText();
 					stfs.add(searchField);
 					searchTextsLayout.addComponent(searchField);
-					
+
 					if (tableInfo.isImmediateSearch()) {
 						searchField.addValueChangeListener(new com.vaadin.data.Property.ValueChangeListener() {
 							private static final long serialVersionUID = 7261179516934915376L;
 							@Override
 							public void valueChange(final ValueChangeEvent event) {
-								doSearchClickAction(stfs);						
+								doSearchClickAction(stfs);
 							}
 						});
 					} else {
@@ -445,7 +447,7 @@ public abstract class MyTable extends CustomComponent {
 								private static final long serialVersionUID = -4319360555953651250L;
 								@Override
 								public void handleAction(final Object sender, final Object target) {
-									doSearchClickAction(stfs);						
+									doSearchClickAction(stfs);
 								}
 							});
 					}
@@ -459,32 +461,32 @@ public abstract class MyTable extends CustomComponent {
 				}
 			}
 		}
-		
+
 	}
 
 	/**
 	 * Do search click action.
-	 * 
+	 *
 	 * @param stfs
 	 *            The {@link SearchText}s.
 	 */
 	private void doSearchClickAction(final List<SearchText> stfs) {
-		
-		
+
+
 		for (SearchText tf : stfs) {
 			tableInfo.getJpaContainer().removeContainerFilters(tf.getPropertyId());
 		}
-		
+
 		/*
 		 * Very important. Keep in mind that there might be some filters before getting to this level of search again.
-		 * For example if the result is restricted to a specific user. Then it must maintain as the result of the user. 
+		 * For example if the result is restricted to a specific user. Then it must maintain as the result of the user.
 		 */
 		if (tableInfo.getJPAFilters() != null) {
 			for (Filter filter : tableInfo.getJPAFilters()) {
 				tableInfo.getJpaContainer().addContainerFilter(filter);
 			}
 		}
-		
+
 		for (SearchText tf : stfs) {
 			if (tf.getValue().length() > 0) {
 				if (tf.isExactMatch()) {
@@ -498,10 +500,10 @@ public abstract class MyTable extends CustomComponent {
 		Notification.show(tableInfo.getJpaContainer().size() + " items found");
 	}
 
-	
+
 	/**
 	 * Sets the JPA container for the table.
-	 * 
+	 *
 	 * @param jpaContainer
 	 *            The new JPA Container.
 	 */
@@ -513,18 +515,18 @@ public abstract class MyTable extends CustomComponent {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Save button listener. Based on each Entity the action varies. That's why it
 	 * is considered as an abstract method.
-	 * 
+	 *
 	 * @return The {@link ClickListener} for "Save" button.
 	 */
 	public abstract ClickListener saveButtonListener();
-	
+
 	/**
 	 * New button listener.
-	 * 
+	 *
 	 * @return The {@link ClickListener} for "New" button.
 	 */
 	private ClickListener newButtonListener() {
@@ -539,7 +541,7 @@ public abstract class MyTable extends CustomComponent {
 
 	/**
 	 * New button listener.
-	 * 
+	 *
 	 * @return The {@link ClickListener} for "New" button.
 	 */
 	private ClickListener importButtonListener() {
@@ -555,7 +557,7 @@ public abstract class MyTable extends CustomComponent {
 
 	/**
 	 * Delete multiple button listener.
-	 * 
+	 *
 	 * @return The {@link ClickListener} for "DeleteMultiple" button.
 	 */
 	private ClickListener deleteMultipleButtonListener() {
@@ -567,10 +569,10 @@ public abstract class MyTable extends CustomComponent {
 			}
 		};
 	}
-	
+
 	/**
 	 * Adds the button listener.
-	 * 
+	 *
 	 * @return The {@link ClickListener}.
 	 */
 	public final ClickListener addButtonListener()	{
@@ -582,12 +584,12 @@ public abstract class MyTable extends CustomComponent {
 			}
 		};
 	}
-	
+
 	/**
 	 * Adds the button listener for the "Add" button.
-	 * 
+	 *
 	 * @param cbl The {@link ClickListener} for "Add" button.
-	 *            
+	 *
 	 */
 	public final void setAddButtonListener(final ClickListener cbl) {
 		btnAdd.addClickListener(cbl);
@@ -595,16 +597,16 @@ public abstract class MyTable extends CustomComponent {
 
 	/**
 	 * Gets the table.
-	 * 
+	 *
 	 * @return The table
 	 */
 	public final Table getTable() {
 		return table;
 	}
-	
+
 	/**
 	 * Gets the parent table.
-	 * 
+	 *
 	 * @return The parent table
 	 */
 	public final Table getParentTable() {
@@ -613,7 +615,7 @@ public abstract class MyTable extends CustomComponent {
 
 	/**
 	 * Sets the parent table.
-	 * 
+	 *
 	 * @param pParentTable
 	 *            The new parent table
 	 */
@@ -623,7 +625,7 @@ public abstract class MyTable extends CustomComponent {
 
 	/**
 	 * Gets the selected item id.
-	 * 
+	 *
 	 * @return The selected item id
 	 */
 	public final Object getSelectedItemId() {
@@ -632,7 +634,7 @@ public abstract class MyTable extends CustomComponent {
 
 	/**
 	 * Sets the selected item id.
-	 * 
+	 *
 	 * @param pSelectedItemId
 	 *            The new selected item id
 	 */
@@ -642,7 +644,7 @@ public abstract class MyTable extends CustomComponent {
 
 	/**
 	 * Gets the {@link TableInfo}.
-	 * 
+	 *
 	 * @return The table info
 	 */
 	public final TableInfo getTableInfo() {
@@ -651,7 +653,7 @@ public abstract class MyTable extends CustomComponent {
 
 	/**
 	 * Sets the {@link TableInfo}.
-	 * 
+	 *
 	 * @param pTableInfo
 	 *            The new table info
 	 */
@@ -661,7 +663,7 @@ public abstract class MyTable extends CustomComponent {
 
 	/**
 	 * This abstract method shall be implemented for each specific project.
-	 * 
+	 *
 	 * @return The file name is created.
 	 */
 	public abstract String export2excel();

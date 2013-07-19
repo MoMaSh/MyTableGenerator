@@ -6,25 +6,25 @@ import org.vaadin.mytablegenerator.windows.ListPopupWindow;
 import com.vaadin.ui.UI;
 
 public abstract class MyUI extends UI {
-	
+
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -4468500468417479189L;
-	
-	/** 
+
+	/**
 	 * The active edit popup window. <br>
-	 * This will indicate which popup window for edit is shown.  
+	 * This will indicate which popup window for edit is shown.
 	 */
 	private EditPopupWindow activeEditPopupWindow;
-	
-	/** 
+
+	/**
 	 * The active list popup window. <br>
-	 * This will indicate which popup window for list is shown. 
+	 * This will indicate which popup window for list is shown.
 	 */
 	private ListPopupWindow activeListPopupWindow;
 
 	/**
 	 * Removes the previously active edit popup and sets the active edit popup window.
-	 * 
+	 *
 	 * @param activeEditPopup
 	 *            the new active edit popup window
 	 */
@@ -35,7 +35,7 @@ public abstract class MyUI extends UI {
 
 	/**
 	 * Removes the previously active list popup and sets the active list popup window.
-	 * 
+	 *
 	 * @param activeListPopup
 	 *            the new active list popup window
 	 */
@@ -66,7 +66,7 @@ public abstract class MyUI extends UI {
 
 	/**
 	 * Used to show the specified edit page as a popup window.
-	 * 
+	 *
 	 * @param editPopup The specified edit popup.
 	 */
 	public void showEditPopup(final EditPopupWindow editPopup) {
@@ -76,7 +76,7 @@ public abstract class MyUI extends UI {
 
 	/**
 	 * Used to show the specified list page as a popup window.
-	 * 
+	 *
 	 * @param listPopup The specified list popup.
 	 */
 	public void showListPopup(final ListPopupWindow listPopup) {

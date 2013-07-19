@@ -1,83 +1,78 @@
 package org.vaadin.mytablegeneratordemo.entities;
 
-import java.util.HashSet;
-import java.util.Set;
+import static javax.persistence.GenerationType.IDENTITY;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.vaadin.mytablegenerator.annotations.MyColumn;
+import org.vaadin.mytablegenerator.annotations.MyEdit;
+
+import com.vaadin.ui.ComboBox;
 
 @Entity
 @Table(name = "state", catalog = "mydemo")
 public class State implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1061537955774365120L;
-	
+
 	@Id
-	@Column(name = "id", unique = true, nullable = false, length = 45)
-	private String id;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "countryId", nullable = false)
-	private Country country;
-	
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "id", unique = true, nullable = false, length = 11)
+	private Integer id;
+
 	@Column(name = "name", nullable = false, length = 45)
+	@MyColumn(id = "name")
+	@MyEdit(caption = "Name")
 	private String name;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "state")
-	private Set<City> cities = new HashSet<City>(0);
+
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "state")
+//	private Set<City> cities = new HashSet<City>(0);
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "countryId", nullable = false)
+	@MyColumn(id = "country.name")
+	@MyEdit(id = "country.id", caption = "Country", itemCaption = "contry.name", componentType = ComboBox.class)
+	private Country country;
 
 	public State() {
 	}
 
-	public State(String id, Country country, String name) {
-		this.id = id;
+	public State(String name, Country country) {
 		this.country = country;
 		this.name = name;
 	}
 
-	public State(String id, Country country, String name, Set<City> cities) {
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
 		this.id = id;
-		this.country = country;
-		this.name = name;
-		this.cities = cities;
-	}
-
-	public String getId() {
-		return this.id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public Country getCountry() {
-		return this.country;
-	}
-
-	public void setCountry(Country country) {
-		this.country = country;
 	}
 
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public Set<City> getCities() {
-		return this.cities;
+	public Country getCountry() {
+		return country;
 	}
 
-	public void setCities(Set<City> cities) {
-		this.cities = cities;
+	public void setCountry(Country country) {
+		this.country = country;
 	}
+
 
 }
